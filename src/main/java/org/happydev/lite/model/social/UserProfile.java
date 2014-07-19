@@ -13,7 +13,7 @@ public class UserProfile {
     private String middleName;
     private String lastName;
     private String phoneNumber;
-    private String photo;
+    private String photoFileName;
     private String selfDescription;
     private Company company;
     private String jobPosition;

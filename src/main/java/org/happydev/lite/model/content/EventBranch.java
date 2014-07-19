@@ -11,4 +11,5 @@ public class EventBranch {
     private Speciality speciality;
     private List<BranchLeader> leaders;
     private String pictureFileName;
+    private String description;
 }

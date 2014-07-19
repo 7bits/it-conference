@@ -11,5 +11,6 @@ public class BranchLeader {
 
     private Long id;
     private User user;
+    private String photoFileName;
     private List<EventBranch> eventBranches;
 }
