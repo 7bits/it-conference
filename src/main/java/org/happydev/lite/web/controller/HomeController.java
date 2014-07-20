@@ -10,7 +10,6 @@ public class HomeController {
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public ModelAndView index() {
-
         return new ModelAndView("index");
     }
 }
