@@ -3,9 +3,9 @@ package org.happydev.lite.model.event;
 import org.happydev.lite.model.social.User;
 
 /**
- * A participant of the concrete Event
+ * An author of the comment for the concrete Event
  */
-public class Participant {
+public class Commenter {
 
     private Long id;
     private User user;

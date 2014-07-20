@@ -1,8 +1,6 @@
 package org.happydev.lite.model.schedule;
 
-import org.happydev.lite.model.content.EventDetails;
-
-import java.util.List;
+import org.happydev.lite.model.content.RoomEventDetails;
 
 /**
  * A room event at the certain room and certain time
@@ -13,5 +11,5 @@ public class RoomEvent {
     private Long firstTimeSlot;
     private Long timeSlotQuantity;
     private Room room;
-    private EventDetails eventDetails;
+    private RoomEventDetails roomEventDetails;
 }

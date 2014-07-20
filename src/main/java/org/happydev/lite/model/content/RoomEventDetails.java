@@ -7,7 +7,7 @@ import java.util.List;
 /**
  * An accepted content of the certain Event.
  */
-public class EventDetails {
+public class RoomEventDetails {
 
     private Long id;
     private String title;
