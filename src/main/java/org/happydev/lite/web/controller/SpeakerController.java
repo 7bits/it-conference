@@ -34,7 +34,7 @@ public class SpeakerController {
      */
     @RequestMapping(value = "/speaker-object/{id}", method = RequestMethod.GET)
     @ResponseBody
-    public SpeakerObjectResponse speakersObject(
+    public SpeakerObjectResponse speakerObject(
             @PathVariable(value = "id") final String idStr
     ) {
         Boolean success = true;
@@ -63,7 +63,7 @@ public class SpeakerController {
      */
     @RequestMapping(value = "/event-speaker-list/{hallEventId}", method = RequestMethod.GET)
     @ResponseBody
-    public SpeakerListResponse eventSpeakersList(
+    public SpeakerListResponse eventSpeakerList(
             @PathVariable(value = "hallEventId") final String hallEventIdStr
     ) {
         Boolean success = true;
@@ -92,7 +92,7 @@ public class SpeakerController {
      */
     @RequestMapping(value = "/event-branch-speaker-list/{eventBranchId}", method = RequestMethod.GET)
     @ResponseBody
-    public SpeakerListResponse eventBranchSpeakersList(
+    public SpeakerListResponse eventBranchSpeakerList(
             @PathVariable(value = "eventBranchId") final String eventBranchIdStr
     ) {
         Boolean success = true;
@@ -121,7 +121,7 @@ public class SpeakerController {
      */
     @RequestMapping(value = "/speciality-speaker-list/{specialityId}", method = RequestMethod.GET)
     @ResponseBody
-    public SpeakerListResponse specialitySpeakersList(
+    public SpeakerListResponse specialitySpeakerList(
             @PathVariable(value = "specialityId") final String specialityIdStr
     ) {
         Boolean success = true;

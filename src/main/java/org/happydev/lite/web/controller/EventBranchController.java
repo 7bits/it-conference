@@ -63,7 +63,7 @@ public class EventBranchController {
      */
     @RequestMapping(value = "/event-branch-list/{hallEventId}", method = RequestMethod.GET)
     @ResponseBody
-    public EventBranchListResponse eventBranchesList(
+    public EventBranchListResponse eventBranchList(
             @PathVariable(value = "hallEventId") final String hallEventIdStr
     ) {
         Boolean success = true;
