@@ -4,6 +4,7 @@ import org.happydev.lite.model.content.Speaker;
 import org.happydev.lite.service.SpeakerPresenter;
 import org.happydev.lite.web.UrlParameterException;
 import org.happydev.lite.web.response.SpeakerListResponse;
+import org.happydev.lite.web.response.SpeakerObjectResponse;
 import org.happydev.lite.web.util.ControllerUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -26,6 +27,29 @@ public class SpeakerController {
 
     @Autowired
     private ControllerUtils controllerUtils;
+
+    /**
+     * Shows a page for the concrete speaker or 404 Not found when ID is absent
+     * @param idStr a String value for Speaker ID
+     * @return ModelAndView object for this page
+     * @throws java.io.IOException Internal error of the servlet container
+     */
+    @RequestMapping(value = "/speaker/{id}", method = RequestMethod.GET)
+    public ModelAndView speakerPage(
+            final HttpServletRequest request,
+            final HttpServletResponse response,
+            @PathVariable(value = "id") final String idStr
+    ) throws IOException {
+        ModelAndView modelAndView = new ModelAndView("speaker-layout");
+        if (idStr == null) {
+            response.sendError(HttpServletResponse.SC_NOT_FOUND);
+            modelAndView = null;
+        } else {
+            modelAndView.addObject(idStr);
+        }
+
+        return modelAndView;
+    }
 
     /**
      * Shows a page for speakers of the concrete Hall Event or 404 Not found when Hall event ID is absent
@@ -51,6 +75,35 @@ public class SpeakerController {
     }
 
     /**
+     * Returns a response object with Speaker object if possible.
+     * When <code>success == true</code> object is present and error message is null.
+     * When <code>success == false</code> object is null and error message is present; only when ID
+     * is wrong or empty.
+     * @param idStr a String value for Speaker ID
+     * @return a SpeakerObjectResponse object, never null
+     */
+    @RequestMapping(value = "/speaker-object/{id}", method = RequestMethod.GET)
+    @ResponseBody
+    public SpeakerObjectResponse speakersObject(
+            @PathVariable(value = "id") final String idStr
+    ) {
+        Boolean success = true;
+        String errorMessage = null;
+        Speaker speaker = null;
+
+        Long id = null;
+        try {
+            id = controllerUtils.convertStringToLong(idStr, true);
+            speaker = speakerPresenter.findSpeakerById(id);
+        } catch (UrlParameterException e) {
+            success = false;
+            errorMessage = "Speaker ID is wrong or empty";
+        }
+
+        return new SpeakerObjectResponse(success, errorMessage, speaker);
+    }
+
+    /**
      * Returns a response object with Speaker list for a concrete Hall event if possible.
      * When <code>success == true</code> list is present and error message is null.
      * When <code>success == false</code> list is null and error message is present; only when Hall event ID
@@ -62,7 +115,7 @@ public class SpeakerController {
     @ResponseBody
     public SpeakerListResponse eventSpeakersList(
             @PathVariable(value = "hallEventId") final String hallEventIdStr
-    ) throws IOException {
+    ) {
         Boolean success = true;
         String errorMessage = null;
         List<Speaker> speakerList = null;
@@ -91,7 +144,7 @@ public class SpeakerController {
     @ResponseBody
     public SpeakerListResponse eventBranchSpeakersList(
             @PathVariable(value = "eventBranchId") final String eventBranchIdStr
-    ) throws IOException {
+    ) {
         Boolean success = true;
         String errorMessage = null;
         List<Speaker> speakerList = null;
@@ -103,6 +156,35 @@ public class SpeakerController {
         } catch (UrlParameterException e) {
             success = false;
             errorMessage = "Event branch ID is wrong or empty";
+        }
+
+        return new SpeakerListResponse(success, errorMessage, speakerList);
+    }
+
+    /**
+     * Returns a response object with Speaker list for a concrete Speciality if possible.
+     * When <code>success == true</code> list is present and error message is null.
+     * When <code>success == false</code> list is null and error message is present; only when Speciality ID
+     * is wrong or empty.
+     * @param specialityIdStr a String value for Speciality ID
+     * @return a SpeakerListResponse object, never null
+     */
+    @RequestMapping(value = "/speciality-speaker-list/{specialityId}", method = RequestMethod.GET)
+    @ResponseBody
+    public SpeakerListResponse specialitySpeakersList(
+            @PathVariable(value = "specialityId") final String specialityIdStr
+    ) {
+        Boolean success = true;
+        String errorMessage = null;
+        List<Speaker> speakerList = null;
+
+        Long specialityId = null;
+        try {
+            specialityId = controllerUtils.convertStringToLong(specialityIdStr, true);
+            speakerList = speakerPresenter.findSpeakersBySpecialityId(specialityId);
+        } catch (UrlParameterException e) {
+            success = false;
+            errorMessage = "Speciality ID is wrong or empty";
         }
 
         return new SpeakerListResponse(success, errorMessage, speakerList);

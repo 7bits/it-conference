@@ -5,7 +5,7 @@ import org.happydev.lite.model.content.Speaker;
 import java.util.List;
 
 /**
- * JSOn API response for Speaker list
+ * JSON API response for Speaker list
  */
 public class SpeakerListResponse extends CommonResponse {
     private List<Speaker> speakerList;

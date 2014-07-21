@@ -4,6 +4,7 @@ import org.happydev.lite.model.content.EventBranch;
 import org.happydev.lite.service.EventBranchPresenter;
 import org.happydev.lite.web.UrlParameterException;
 import org.happydev.lite.web.response.EventBranchListResponse;
+import org.happydev.lite.web.response.EventBranchObjectResponse;
 import org.happydev.lite.web.util.ControllerUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -48,6 +49,35 @@ public class EventBranchController {
         }
 
         return modelAndView;
+    }
+
+    /**
+     * Returns a response object with Event branch object if possible.
+     * When <code>success == true</code> object is present and error message is null.
+     * When <code>success == false</code> object is null and error message is present; only when ID
+     * is wrong or empty.
+     * @param idStr a String value for Event branch ID
+     * @return a EventBranchObjectResponse object, never null
+     */
+    @RequestMapping(value = "/event-branch-object/{id}", method = RequestMethod.GET)
+    @ResponseBody
+    public EventBranchObjectResponse eventBranchObject(
+            @PathVariable(value = "id") final String idStr
+    ) {
+        Boolean success = true;
+        String errorMessage = null;
+        EventBranch eventBranch = null;
+
+        Long id = null;
+        try {
+            id = controllerUtils.convertStringToLong(idStr, true);
+            eventBranch = eventBranchPresenter.findEventBranchById(id);
+        } catch (UrlParameterException e) {
+            success = false;
+            errorMessage = "Event branch ID is wrong or empty";
+        }
+
+        return new EventBranchObjectResponse(success, errorMessage, eventBranch);
     }
 
     /**

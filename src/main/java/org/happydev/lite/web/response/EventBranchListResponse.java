@@ -5,7 +5,7 @@ import org.happydev.lite.model.content.EventBranch;
 import java.util.List;
 
 /**
- * JSOn API response for Event branch list
+ * JSON API response for Event branch list
  */
 public class EventBranchListResponse extends CommonResponse {
     private List<EventBranch> eventBranchList;
