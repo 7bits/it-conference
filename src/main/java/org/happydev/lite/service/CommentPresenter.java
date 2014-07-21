@@ -20,29 +20,29 @@ public class CommentPresenter {
     }
 
     /**
-     * Finds all Event comments for the concrete Hall Event
-     * @param eventId an ID of the Hall Event
+     * Finds all Event comments for the concrete Hall event
+     * @param hallEventId an ID of the Hall event
      * @return a list of EventComment objects
      */
-    public List<EventComment> findAllEventCommentsByEventId(final Long eventId) {
+    public List<EventComment> findAllEventCommentsByHallEventId(final Long hallEventId) {
         return new ArrayList<EventComment>();
     }
 
     /**
-     * Finds all Before event comments for the concrete Hall Event
-     * @param eventId an ID of the Hall Event
+     * Finds all Before event comments for the concrete Hall event
+     * @param hallEventId an ID of the Hall event
      * @return a list of EventComment objects
      */
-    public List<EventComment> findBeforeEventCommentsByEventId(final Long eventId) {
+    public List<EventComment> findBeforeEventCommentsByHallEventId(final Long hallEventId) {
         return new ArrayList<EventComment>();
     }
 
     /**
-     * Finds all After event comments for the concrete Hall Event
-     * @param eventId an ID of the Hall Event
+     * Finds all After event comments for the concrete Hall event
+     * @param hallEventId an ID of the Hall event
      * @return a list of EventComment objects
      */
-    public List<EventComment> findAfterEventCommentsByEventId(final Long eventId) {
+    public List<EventComment> findAfterEventCommentsByHallEventId(final Long hallEventId) {
         return new ArrayList<EventComment>();
     }
 }

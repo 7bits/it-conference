@@ -20,11 +20,11 @@ public class SpeakerPresenter {
     }
 
     /**
-     * Finds all Speakers for the concrete Event Branch
-     * @param branchId an ID of the Branch
+     * Finds all Speakers for the concrete Event branch
+     * @param eventBranchId an ID of the Event branch
      * @return a list of Speaker objects
      */
-    public List<Speaker> findSpeakersByBranchId(final Long branchId) {
+    public List<Speaker> findSpeakersByEventBranchId(final Long eventBranchId) {
         return new ArrayList<Speaker>();
     }
 
@@ -38,11 +38,11 @@ public class SpeakerPresenter {
     }
 
     /**
-     * Finds all Speakers without talks for the concrete Hall Event
-     * @param eventId an ID of the Hall Event
+     * Finds all Speakers without talks for the concrete Hall event
+     * @param hallEventId an ID of the Hall event
      * @return a list of Speaker objects
      */
-    public List<Speaker> findSpeakersByEventId(final Long eventId) {
+    public List<Speaker> findSpeakersByHallEventId(final Long hallEventId) {
         return new ArrayList<Speaker>();
     }
 }

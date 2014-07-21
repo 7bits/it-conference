@@ -29,40 +29,48 @@ public class SpeakerController {
 
     /**
      * Shows a page for speakers of the concrete Hall Event or 404 Not found when Hall event ID is absent
-     * @param eventIdStr a String value for Hall event ID
+     * @param hallEventIdStr a String value for Hall event ID
      * @return ModelAndView object for this page
      * @throws java.io.IOException Internal error of the servlet container
      */
-    @RequestMapping(value = "/speakers/{eventId}", method = RequestMethod.GET)
+    @RequestMapping(value = "/speakers/{hallEventId}", method = RequestMethod.GET)
     public ModelAndView speakersPage(
             final HttpServletRequest request,
             final HttpServletResponse response,
-            @PathVariable(value = "eventId") final String eventIdStr
+            @PathVariable(value = "hallEventId") final String hallEventIdStr
     ) throws IOException {
         ModelAndView modelAndView = new ModelAndView("speakers-layout");
-        if (eventIdStr == null) {
+        if (hallEventIdStr == null) {
             response.sendError(HttpServletResponse.SC_NOT_FOUND);
             modelAndView = null;
         } else {
-            modelAndView.addObject(eventIdStr);
+            modelAndView.addObject(hallEventIdStr);
         }
 
         return modelAndView;
     }
 
-    @RequestMapping(value = "/event-speaker-list/{eventId}", method = RequestMethod.GET)
+    /**
+     * Returns a response object with Speaker list for a concrete Hall event if possible.
+     * When <code>success == true</code> list is present and error message is null.
+     * When <code>success == false</code> list is null and error message is present; only when Hall event ID
+     * is wrong or empty.
+     * @param hallEventIdStr a String value for Hall event ID
+     * @return a SpeakerListResponse object, never null
+     */
+    @RequestMapping(value = "/event-speaker-list/{hallEventId}", method = RequestMethod.GET)
     @ResponseBody
     public SpeakerListResponse eventSpeakersList(
-            @PathVariable(value = "eventId") final String eventIdStr
+            @PathVariable(value = "hallEventId") final String hallEventIdStr
     ) throws IOException {
         Boolean success = true;
         String errorMessage = null;
         List<Speaker> speakerList = null;
 
-        Long eventId = null;
+        Long hallEventId = null;
         try {
-            eventId = controllerUtils.convertStringToLong(eventIdStr, true);
-            speakerList = speakerPresenter.findSpeakersByEventId(eventId);
+            hallEventId = controllerUtils.convertStringToLong(hallEventIdStr, true);
+            speakerList = speakerPresenter.findSpeakersByHallEventId(hallEventId);
         } catch (UrlParameterException e) {
             success = false;
             errorMessage = "Hall event ID is wrong or empty";
@@ -71,19 +79,27 @@ public class SpeakerController {
         return new SpeakerListResponse(success, errorMessage, speakerList);
     }
 
-    @RequestMapping(value = "/branch-speaker-list/{branchId}", method = RequestMethod.GET)
+    /**
+     * Returns a response object with Speaker list for a concrete Event branch if possible.
+     * When <code>success == true</code> list is present and error message is null.
+     * When <code>success == false</code> list is null and error message is present; only when Event branch ID
+     * is wrong or empty.
+     * @param eventBranchIdStr a String value for Event branch ID
+     * @return a SpeakerListResponse object, never null
+     */
+    @RequestMapping(value = "/event-branch-speaker-list/{eventBranchId}", method = RequestMethod.GET)
     @ResponseBody
-    public SpeakerListResponse branchSpeakersList(
-            @PathVariable(value = "branchId") final String branchIdStr
+    public SpeakerListResponse eventBranchSpeakersList(
+            @PathVariable(value = "eventBranchId") final String eventBranchIdStr
     ) throws IOException {
         Boolean success = true;
         String errorMessage = null;
         List<Speaker> speakerList = null;
 
-        Long branchId = null;
+        Long eventBranchId = null;
         try {
-            branchId = controllerUtils.convertStringToLong(branchIdStr, true);
-            speakerList = speakerPresenter.findSpeakersByBranchId(branchId);
+            eventBranchId = controllerUtils.convertStringToLong(eventBranchIdStr, true);
+            speakerList = speakerPresenter.findSpeakersByEventBranchId(eventBranchId);
         } catch (UrlParameterException e) {
             success = false;
             errorMessage = "Event branch ID is wrong or empty";

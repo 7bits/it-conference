@@ -21,10 +21,10 @@ public class RoomEventPresenter {
 
     /**
      * Finds all Room events for the concrete Event branch
-     * @param branchId an ID of the EventBranch
+     * @param eventBranchId an ID of the Event branch
      * @return a list of the RoomEvent objects
      */
-    public List<RoomEvent> findRoomEventsByBranchId(final Long branchId) {
+    public List<RoomEvent> findRoomEventsByEventBranchId(final Long eventBranchId) {
         return new ArrayList<RoomEvent>();
     }
 
@@ -39,22 +39,22 @@ public class RoomEventPresenter {
 
     /**
      * Finds all Room events for the concrete Hall event
-     * @param eventId an ID of the Hall event
+     * @param hallEventId an ID of the Hall event
      * @return a list of the RoomEvent objects
      */
-    public List<RoomEvent> findRoomEventsByEventId(final Long eventId) {
+    public List<RoomEvent> findRoomEventsByHallEventId(final Long hallEventId) {
         return new ArrayList<RoomEvent>();
     }
 
     /**
      * Finds all Room events for the concrete Hall event
-     * @param eventId an ID of the Hall event
+     * @param hallEventId an ID of the Hall event
      * @param start a timestamp of the start
      * @param end a timestamp of the end
      * @return a list of the RoomEvent objects
      */
-    public List<RoomEvent> findRoomEventsByEventIdForTimeInterval(
-        final Long eventId, final Long start, final Long end
+    public List<RoomEvent> findRoomEventsByHallEventIdForTimeInterval(
+            final Long hallEventId, final Long start, final Long end
     ) {
         return new ArrayList<RoomEvent>();
     }

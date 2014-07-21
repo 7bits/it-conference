@@ -21,10 +21,10 @@ public class EventBranchPresenter {
 
     /**
      * Finds all Event branches for the concrete Hall event
-     * @param eventId an ID of the Hall event
+     * @param hallEventId an ID of the Hall event
      * @return a list of the EventBranch objects
      */
-    public List<EventBranch> findEventBranchesByEventId(final Long eventId) {
+    public List<EventBranch> findEventBranchesByHallEventId(final Long hallEventId) {
         return new ArrayList<EventBranch>();
     }
 }

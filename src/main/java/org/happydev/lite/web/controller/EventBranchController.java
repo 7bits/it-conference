@@ -55,22 +55,22 @@ public class EventBranchController {
      * When <code>success == true</code> list is present and error message is null.
      * When <code>success == false</code> list is null and error message is present; only when Hall event ID
      * is wrong or empty.
-     * @param eventIdStr a String value for Hall event ID
+     * @param hallEventIdStr a String value for Hall event ID
      * @return an EventBranchListResponse object, never null
      */
-    @RequestMapping(value = "/event-branch-list/{eventId}", method = RequestMethod.GET)
+    @RequestMapping(value = "/event-branch-list/{hallEventId}", method = RequestMethod.GET)
     @ResponseBody
     public EventBranchListResponse eventBranchesList(
-            @PathVariable(value = "eventId") final String eventIdStr
+            @PathVariable(value = "hallEventId") final String hallEventIdStr
     ) {
         Boolean success = true;
         String errorMessage = null;
         List<EventBranch> eventBranchList = null;
 
-        Long eventId = null;
+        Long hallEventId = null;
         try {
-            eventId = controllerUtils.convertStringToLong(eventIdStr, true);
-            eventBranchList = eventBranchPresenter.findEventBranchesByEventId(eventId);
+            hallEventId = controllerUtils.convertStringToLong(hallEventIdStr, true);
+            eventBranchList = eventBranchPresenter.findEventBranchesByHallEventId(hallEventId);
         } catch (UrlParameterException e) {
             success = false;
             errorMessage = "Hall event ID is wrong or empty";

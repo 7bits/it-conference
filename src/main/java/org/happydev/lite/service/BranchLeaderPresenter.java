@@ -21,20 +21,20 @@ public class BranchLeaderPresenter {
     }
 
     /**
-     * Finds all Branch leaders for the concrete Event Branch
-     * @param branchId an ID of the Branch
+     * Finds all Branch leaders for the concrete Event branch
+     * @param eventBranchId an ID of the Event branch
      * @return a list of BranchLeader objects
      */
-    public List<BranchLeader> findLeadersByBranchId(final Long branchId) {
+    public List<BranchLeader> findLeadersByEventBranchId(final Long eventBranchId) {
         return new ArrayList<BranchLeader>();
     }
 
     /**
-     * Finds all Branch leaders for the concrete Hall Event
-     * @param eventId an ID of the Hall Event
+     * Finds all Branch leaders for the concrete Hall event
+     * @param hallEventId an ID of the Hall event
      * @return a list of Speaker objects
      */
-    public List<Speaker> findBranchLeadersByEventId(final Long eventId) {
+    public List<Speaker> findBranchLeadersByHallEventId(final Long hallEventId) {
         return new ArrayList<Speaker>();
     }
 }
