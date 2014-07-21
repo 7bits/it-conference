@@ -21,7 +21,7 @@ public class SpecialityListResponse extends CommonResponse {
         return specialityList;
     }
 
-    public void setSpecialityList(List<Speciality> specialityList) {
+    public void setSpecialityList(final List<Speciality> specialityList) {
         this.specialityList = specialityList;
     }
 }

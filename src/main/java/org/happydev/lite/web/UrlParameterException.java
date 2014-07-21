@@ -9,11 +9,11 @@ public class UrlParameterException extends Exception {
         super();
     }
 
-    public UrlParameterException(String message) {
+    public UrlParameterException(final String message) {
         super(message);
     }
 
-    public UrlParameterException(String message, Throwable cause) {
+    public UrlParameterException(final String message, final Throwable cause) {
         super(message, cause);
     }
 }

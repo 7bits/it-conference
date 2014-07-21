@@ -19,7 +19,7 @@ public class EventBranchObjectResponse extends CommonResponse {
         return eventBranch;
     }
 
-    public void setEventBranch(EventBranch eventBranch) {
+    public void setEventBranch(final EventBranch eventBranch) {
         this.eventBranch = eventBranch;
     }
 }

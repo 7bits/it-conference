@@ -14,6 +14,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
 
+/**
+ * JSON API controller for Specialities
+ */
 @Controller
 public class SpecialityController {
 

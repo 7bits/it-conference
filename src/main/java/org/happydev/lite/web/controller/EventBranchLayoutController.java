@@ -12,6 +12,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+/**
+ * Layout controller for Event branches
+ */
 @Controller
 public class EventBranchLayoutController {
 

@@ -19,7 +19,7 @@ public class SpeakerListResponse extends CommonResponse {
         return speakerList;
     }
 
-    public void setSpeakerList(List<Speaker> speakerList) {
+    public void setSpeakerList(final List<Speaker> speakerList) {
         this.speakerList = speakerList;
     }
 }

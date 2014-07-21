@@ -20,7 +20,7 @@ public class CommonResponse {
         return success;
     }
 
-    public void setSuccess(Boolean success) {
+    public void setSuccess(final Boolean success) {
         this.success = success;
     }
 
@@ -28,7 +28,7 @@ public class CommonResponse {
         return errorMessage;
     }
 
-    public void setErrorMessage(String errorMessage) {
+    public void setErrorMessage(final String errorMessage) {
         this.errorMessage = errorMessage;
     }
 }

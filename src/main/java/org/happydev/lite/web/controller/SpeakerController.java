@@ -15,6 +15,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
 
+/**
+ * JSON API controller for Speakers
+ */
 @Controller
 public class SpeakerController {
 

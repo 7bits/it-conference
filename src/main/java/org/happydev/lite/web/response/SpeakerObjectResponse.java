@@ -17,7 +17,7 @@ public class SpeakerObjectResponse extends CommonResponse {
         return speaker;
     }
 
-    public void setSpeaker(Speaker speaker) {
+    public void setSpeaker(final Speaker speaker) {
         this.speaker = speaker;
     }
 }

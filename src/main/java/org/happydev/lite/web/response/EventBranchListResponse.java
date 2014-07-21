@@ -21,7 +21,7 @@ public class EventBranchListResponse extends CommonResponse {
         return eventBranchList;
     }
 
-    public void setEventBranchList(List<EventBranch> eventBranchList) {
+    public void setEventBranchList(final List<EventBranch> eventBranchList) {
         this.eventBranchList = eventBranchList;
     }
 }
