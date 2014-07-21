@@ -36,9 +36,9 @@ public class PartnerController {
      * @param hallEventIdStr a String value for Hall event ID
      * @return a PartnerListResponse object, never null
      */
-    @RequestMapping(value = "/all-partner-list/{hallEventId}", method = RequestMethod.GET)
+    @RequestMapping(value = "/hall-event-all-partner-list/{hallEventId}", method = RequestMethod.GET)
     @ResponseBody
-    public PartnerListResponse allPartnerList(
+    public PartnerListResponse hallEventAllPartnerList(
             @PathVariable(value = "hallEventId") final String hallEventIdStr
     ) {
         Boolean success = true;

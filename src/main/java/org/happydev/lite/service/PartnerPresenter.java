@@ -32,6 +32,7 @@ public class PartnerPresenter {
     /**
      * Finds Partners of the concrete type for the concrete Hall event
      * @param hallEventId an ID of the Hall event
+     * @param partnerRoleName a name of the Partner role
      * @return a list of the Partner objects
      */
     public List<Partner> findPartnersByHallEventIdAndRoleName(
