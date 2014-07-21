@@ -5,6 +5,7 @@ import org.happydev.lite.service.EventBranchPresenter;
 import org.happydev.lite.web.UrlParameterException;
 import org.happydev.lite.web.response.EventBranchListResponse;
 import org.happydev.lite.web.util.ControllerUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,8 +21,10 @@ import java.util.List;
 @Controller
 public class EventBranchController {
 
+    @Autowired
     private EventBranchPresenter eventBranchPresenter;
 
+    @Autowired
     private ControllerUtils controllerUtils;
 
     /**
@@ -74,21 +77,5 @@ public class EventBranchController {
         }
 
         return new EventBranchListResponse(success, errorMessage, eventBranchList);
-    }
-
-    public EventBranchPresenter getEventBranchPresenter() {
-        return eventBranchPresenter;
-    }
-
-    public void setEventBranchPresenter(EventBranchPresenter eventBranchPresenter) {
-        this.eventBranchPresenter = eventBranchPresenter;
-    }
-
-    public ControllerUtils getControllerUtils() {
-        return controllerUtils;
-    }
-
-    public void setControllerUtils(ControllerUtils controllerUtils) {
-        this.controllerUtils = controllerUtils;
     }
 }

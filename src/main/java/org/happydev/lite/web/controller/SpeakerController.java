@@ -5,6 +5,7 @@ import org.happydev.lite.service.SpeakerPresenter;
 import org.happydev.lite.web.UrlParameterException;
 import org.happydev.lite.web.response.SpeakerListResponse;
 import org.happydev.lite.web.util.ControllerUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,8 +21,10 @@ import java.util.List;
 @Controller
 public class SpeakerController {
 
+    @Autowired
     private SpeakerPresenter speakerPresenter;
 
+    @Autowired
     private ControllerUtils controllerUtils;
 
     /**
@@ -87,21 +90,5 @@ public class SpeakerController {
         }
 
         return new SpeakerListResponse(success, errorMessage, speakerList);
-    }
-
-    public SpeakerPresenter getSpeakerPresenter() {
-        return speakerPresenter;
-    }
-
-    public void setSpeakerPresenter(SpeakerPresenter speakerPresenter) {
-        this.speakerPresenter = speakerPresenter;
-    }
-
-    public ControllerUtils getControllerUtils() {
-        return controllerUtils;
-    }
-
-    public void setControllerUtils(ControllerUtils controllerUtils) {
-        this.controllerUtils = controllerUtils;
     }
 }
