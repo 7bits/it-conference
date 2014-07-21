@@ -50,8 +50,6 @@ public class SpeakerController {
     @RequestMapping(value = "/event-speaker-list/{eventId}", method = RequestMethod.GET)
     @ResponseBody
     public SpeakerListResponse eventSpeakersList(
-            final HttpServletRequest request,
-            final HttpServletResponse response,
             @PathVariable(value = "eventId") final String eventIdStr
     ) throws IOException {
         Boolean success = true;
@@ -73,8 +71,6 @@ public class SpeakerController {
     @RequestMapping(value = "/branch-speaker-list/{branchId}", method = RequestMethod.GET)
     @ResponseBody
     public SpeakerListResponse branchSpeakersList(
-            final HttpServletRequest request,
-            final HttpServletResponse response,
             @PathVariable(value = "branchId") final String branchIdStr
     ) throws IOException {
         Boolean success = true;
