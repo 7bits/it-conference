@@ -13,7 +13,7 @@ public class SpecialityPresenter {
     /**
      * Finds concrete Speciality
      * @param id an ID of the Speciality
-     * @return an Speciality object or null when ID is wrong
+     * @return a Speciality object or null when ID is wrong
      */
     public Speciality findSpecialityById(final Long id) {
         return new Speciality();
