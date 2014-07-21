@@ -1,9 +1,12 @@
 package org.happydev.lite.model.schedule;
 
+import org.happydev.lite.model.NamedType;
+import org.happydev.lite.model.WrongTypeNameException;
+
 /**
  * A type of the Talk
  */
-public class RoomEventType {
+public class RoomEventType extends NamedType {
 
     /**
      * A type for reports
@@ -46,6 +49,32 @@ public class RoomEventType {
      */
     public static final String SUPPER_TYPE_NAME = "Supper";
 
-    private Long id;
-    private String name;
+    /**
+     * Default constructor by name
+     * @param name a type name
+     */
+    public RoomEventType(final String name) {
+        super(name);
+    }
+
+    @Override
+    public RoomEventType getTypeByName(final String name) throws WrongTypeNameException {
+        if (name == null) {
+            throw new WrongTypeNameException("Type name is empty");
+        }
+        switch (name) {
+            case REPORT_TYPE_NAME:
+            case WORKSHOP_TYPE_NAME:
+            case DISCUSSION_TYPE_NAME:
+            case BARCAMP_TYPE_NAME:
+            case BREAK_TYPE_NAME:
+            case COFFEE_PAUSE_TYPE_NAME:
+            case BREAKFAST_TYPE_NAME:
+            case LUNCH_TYPE_NAME:
+            case DINNER_TYPE_NAME:
+            case SUPPER_TYPE_NAME:
+                return new RoomEventType(name);
+            default: throw new WrongTypeNameException("Type name is wrong");
+        }
+    }
 }

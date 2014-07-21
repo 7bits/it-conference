@@ -1,8 +1,8 @@
 package org.happydev.lite.web.controller;
 
+import org.happydev.lite.model.WrongTypeNameException;
 import org.happydev.lite.model.event.Partner;
 import org.happydev.lite.service.PartnerPresenter;
-import org.happydev.lite.service.WrongRoleException;
 import org.happydev.lite.web.UrlParameterException;
 import org.happydev.lite.web.response.PartnerListResponse;
 import org.happydev.lite.web.util.ControllerUtils;
@@ -92,7 +92,7 @@ public class PartnerController {
         if (success) {
             try {
                 partnerList = partnerPresenter.findTypedPartnersByHallEventId(hallEventId, partnerRoleName);
-            } catch (WrongRoleException e) {
+            } catch (WrongTypeNameException e) {
                 success = false;
                 errorMessage = "Partner role name is wrong";
             }

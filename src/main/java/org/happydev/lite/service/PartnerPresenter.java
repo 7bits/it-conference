@@ -1,5 +1,6 @@
 package org.happydev.lite.service;
 
+import org.happydev.lite.model.WrongTypeNameException;
 import org.happydev.lite.model.event.Partner;
 
 import java.util.ArrayList;
@@ -35,7 +36,7 @@ public class PartnerPresenter {
      */
     public List<Partner> findTypedPartnersByHallEventId(
             final Long hallEventId, final String partnerRoleName
-    ) throws WrongRoleException {
+    ) throws WrongTypeNameException {
         return new ArrayList<Partner>();
     }
 }

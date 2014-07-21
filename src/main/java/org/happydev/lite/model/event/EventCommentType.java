@@ -1,9 +1,12 @@
 package org.happydev.lite.model.event;
 
+import org.happydev.lite.model.NamedType;
+import org.happydev.lite.model.WrongTypeNameException;
+
 /**
  * A type of the Event comment
  */
-public class EventCommentType {
+public class EventCommentType extends NamedType {
 
     /**
      * A type for comments before Event
@@ -14,6 +17,24 @@ public class EventCommentType {
      */
     public static final String AFTER_COMMENT_TYPE_NAME = "AfterComment";
 
-    private Long id;
-    private String name;
+    /**
+     * Default constructor by name
+     * @param name a type name
+     */
+    public EventCommentType(final String name) {
+        super(name);
+    }
+
+    @Override
+    public EventCommentType getTypeByName(final String name) throws WrongTypeNameException {
+        if (name == null) {
+            throw new WrongTypeNameException("Type name is empty");
+        }
+        switch (name) {
+            case BEFORE_COMMENT_TYPE_NAME:
+            case AFTER_COMMENT_TYPE_NAME:
+                return new EventCommentType(name);
+            default: throw new WrongTypeNameException("Type name is wrong");
+        }
+    }
 }
