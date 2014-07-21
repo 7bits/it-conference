@@ -2,6 +2,7 @@ package org.happydev.lite.web.controller;
 
 import org.happydev.lite.model.WrongTypeNameException;
 import org.happydev.lite.model.event.Partner;
+import org.happydev.lite.model.event.PartnerRole;
 import org.happydev.lite.service.PartnerPresenter;
 import org.happydev.lite.web.UrlParameterException;
 import org.happydev.lite.web.response.PartnerListResponse;
@@ -57,18 +58,55 @@ public class PartnerController {
     }
 
     /**
-     * Returns a response object with Partner list of the given role if possible.
+     * Returns a response object with Partner list of the Sponsor role if possible.
      * When <code>success == true</code> list is present and error message is null.
      * When <code>success == false</code> list is null and error message is present; only when Hall event ID
      * is wrong or empty.
      * @param hallEventIdStr a String value for Hall event ID
      * @return a PartnerListResponse object, never null
      */
-    @RequestMapping(value = "/typed-partner-list/{hallEventId}/{partnerRoleName}", method = RequestMethod.GET)
+    @RequestMapping(value = "/hall-event-sponsor-list/{hallEventId}", method = RequestMethod.GET)
     @ResponseBody
-    public PartnerListResponse typedPartnerList(
-            @PathVariable(value = "hallEventId") final String hallEventIdStr,
-            @PathVariable(value = "partnerRoleName") final String partnerRoleName
+    public PartnerListResponse hallEventSponsorList(
+            @PathVariable(value = "hallEventId") final String hallEventIdStr
+    ) {
+        return typedPartnerList(hallEventIdStr, PartnerRole.SPONSOR_ROLE_NAME);
+    }
+
+    /**
+     * Returns a response object with Partner list of the Creator role if possible.
+     * When <code>success == true</code> list is present and error message is null.
+     * When <code>success == false</code> list is null and error message is present; only when Hall event ID
+     * is wrong or empty.
+     * @param hallEventIdStr a String value for Hall event ID
+     * @return a PartnerListResponse object, never null
+     */
+    @RequestMapping(value = "/hall-event-creator-list/{hallEventId}", method = RequestMethod.GET)
+    @ResponseBody
+    public PartnerListResponse hallEventCreatorList(
+            @PathVariable(value = "hallEventId") final String hallEventIdStr
+    ) {
+        return typedPartnerList(hallEventIdStr, PartnerRole.CREATOR_ROLE_NAME);
+    }
+
+    /**
+     * Returns a response object with Partner list of the Partner role if possible.
+     * When <code>success == true</code> list is present and error message is null.
+     * When <code>success == false</code> list is null and error message is present; only when Hall event ID
+     * is wrong or empty.
+     * @param hallEventIdStr a String value for Hall event ID
+     * @return a PartnerListResponse object, never null
+     */
+    @RequestMapping(value = "/hall-event-partner-list/{hallEventId}", method = RequestMethod.GET)
+    @ResponseBody
+    public PartnerListResponse hallEventPartnerList(
+            @PathVariable(value = "hallEventId") final String hallEventIdStr
+    ) {
+        return typedPartnerList(hallEventIdStr, PartnerRole.PARTNER_ROLE_NAME);
+    }
+
+    private PartnerListResponse typedPartnerList(
+            final String hallEventIdStr, final String partnerRoleName
     ) {
         Boolean success = true;
         String errorMessage = null;
@@ -83,18 +121,13 @@ public class PartnerController {
         }
 
         if (success) {
-            if (partnerRoleName == null) {
-                success = false;
-                errorMessage = "Partner role name is empty";
-            }
-        }
-
-        if (success) {
             try {
-                partnerList = partnerPresenter.findTypedPartnersByHallEventId(hallEventId, partnerRoleName);
+                partnerList = partnerPresenter.findPartnersByHallEventIdAndRoleName(
+                        hallEventId, partnerRoleName
+                );
             } catch (WrongTypeNameException e) {
                 success = false;
-                errorMessage = "Partner role name is wrong";
+                errorMessage = partnerRoleName + " role name is wrong";
             }
         }
 

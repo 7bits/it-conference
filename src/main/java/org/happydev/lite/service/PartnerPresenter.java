@@ -34,7 +34,7 @@ public class PartnerPresenter {
      * @param hallEventId an ID of the Hall event
      * @return a list of the Partner objects
      */
-    public List<Partner> findTypedPartnersByHallEventId(
+    public List<Partner> findPartnersByHallEventIdAndRoleName(
             final Long hallEventId, final String partnerRoleName
     ) throws WrongTypeNameException {
         return new ArrayList<Partner>();
