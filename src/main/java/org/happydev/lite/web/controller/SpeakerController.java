@@ -64,7 +64,7 @@ public class SpeakerController {
      * @param hallEventIdStr a String value for Hall event ID
      * @return a SpeakerListResponse object, never null
      */
-    @RequestMapping(value = "/event-speaker-list/{hallEventId}", method = RequestMethod.GET)
+    @RequestMapping(value = "/hall-event-speaker-list/{hallEventId}", method = RequestMethod.GET)
     @ResponseBody
     public SpeakerListResponse eventSpeakerList(
             @PathVariable(value = "hallEventId") final String hallEventIdStr

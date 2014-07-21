@@ -1,7 +1,6 @@
 package org.happydev.lite.service;
 
 import org.happydev.lite.model.content.BranchLeader;
-import org.happydev.lite.model.content.Speaker;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,7 +24,7 @@ public class BranchLeaderPresenter {
      * @param eventBranchId an ID of the Event branch
      * @return a list of BranchLeader objects
      */
-    public List<BranchLeader> findLeadersByEventBranchId(final Long eventBranchId) {
+    public List<BranchLeader> findBranchLeadersByEventBranchId(final Long eventBranchId) {
         return new ArrayList<BranchLeader>();
     }
 
@@ -34,7 +33,7 @@ public class BranchLeaderPresenter {
      * @param hallEventId an ID of the Hall event
      * @return a list of Speaker objects
      */
-    public List<Speaker> findBranchLeadersByHallEventId(final Long hallEventId) {
-        return new ArrayList<Speaker>();
+    public List<BranchLeader> findBranchLeadersByHallEventId(final Long hallEventId) {
+        return new ArrayList<BranchLeader>();
     }
 }
