@@ -32,7 +32,7 @@ public class SpeakerController {
      * When <code>success == true</code> object is present and error message is null.
      * When <code>success == false</code> object is null and error message is present; only when ID
      * is wrong or empty.
-     * @param idStr a String value for Speaker ID
+     * @param idStr a String value for ID
      * @return a SpeakerObjectResponse object, never null
      */
     @RequestMapping(value = "/speaker-object/{id}", method = RequestMethod.GET)

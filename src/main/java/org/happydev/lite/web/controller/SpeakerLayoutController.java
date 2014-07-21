@@ -22,8 +22,8 @@ public class SpeakerLayoutController {
     private ControllerUtils controllerUtils;
 
     /**
-     * Shows a page for the concrete speaker or 404 Not found when ID is absent
-     * @param idStr a String value for Speaker ID
+     * Shows a page for the concrete Speaker or 404 Not found when ID is absent
+     * @param idStr a String value for ID
      * @return ModelAndView object for this page
      * @throws java.io.IOException Internal error of the servlet container
      */
@@ -45,7 +45,7 @@ public class SpeakerLayoutController {
     }
 
     /**
-     * Shows a page for speakers of the concrete Hall Event or 404 Not found when Hall event ID is absent
+     * Shows a page for Speakers of the concrete Hall Event or 404 Not found when Hall event ID is absent
      * @param hallEventIdStr a String value for Hall event ID
      * @return ModelAndView object for this page
      * @throws java.io.IOException Internal error of the servlet container
