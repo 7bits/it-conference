@@ -169,4 +169,33 @@ public class RoomEventController {
 
         return new RoomEventListResponse(success, errorMessage, roomEventList);
     }
+
+    /**
+     * Returns a response object with Room event list for a concrete Speaker if possible.
+     * When <code>success == true</code> list is present and error message is null.
+     * When <code>success == false</code> list is null and error message is present; only when Speaker ID
+     * is wrong or empty.
+     * @param speakerIdStr a String value for Speaker ID
+     * @return a RoomEventListResponse object, never null
+     */
+    @RequestMapping(value = "/speaker-room-event-list/{speakerId}", method = RequestMethod.GET)
+    @ResponseBody
+    public RoomEventListResponse speakerRoomEventList(
+            @PathVariable(value = "speakerId") final String speakerIdStr
+    ) {
+        Boolean success = true;
+        String errorMessage = null;
+        List<RoomEvent> roomEventList = null;
+
+        Long speakerId = null;
+        try {
+            speakerId = controllerUtils.convertStringToLong(speakerIdStr, true);
+            roomEventList = roomEventPresenter.findRoomEventsBySpeakerId(speakerId);
+        } catch (UrlParameterException e) {
+            success = false;
+            errorMessage = "Speaker ID is wrong or empty";
+        }
+
+        return new RoomEventListResponse(success, errorMessage, roomEventList);
+    }
 }
