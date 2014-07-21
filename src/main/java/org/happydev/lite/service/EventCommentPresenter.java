@@ -8,7 +8,7 @@ import java.util.List;
 /**
  * Representation for the Event comments
  */
-public class CommentPresenter {
+public class EventCommentPresenter {
 
     /**
      * Finds concrete Event comment
