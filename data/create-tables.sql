@@ -1,5 +1,3 @@
-USE `it-conference`;
-
 -- Social
 
 CREATE TABLE IF NOT EXISTS `location` (
@@ -8,7 +6,7 @@ CREATE TABLE IF NOT EXISTS `location` (
   `city` varchar(255) NOT NULL,
   `first_address` varchar(500) DEFAULT NULL,
   `second_address` varchar(500) DEFAULT NULL,
-  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `created_at` timestamp NOT NULL DEFAULT '2014-01-01 00:00:00',
   `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
@@ -18,11 +16,14 @@ CREATE TABLE IF NOT EXISTS `company` (
   `name` varchar(255) NOT NULL,
   `url` varchar(255) NOT NULL,
   `location_id` bigint(20) DEFAULT NULL,
-  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `created_at` timestamp NOT NULL DEFAULT '2014-01-01 00:00:00',
   `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
-  FOREIGN KEY (`location_id`) ON `location`(`id`)
+  KEY `location_id` (`location_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
+
+ALTER TABLE `company`
+  ADD CONSTRAINT `company_location_fk` FOREIGN KEY (`location_id`) REFERENCES `location` (`id`);
 
 CREATE TABLE IF NOT EXISTS `user` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
@@ -30,7 +31,7 @@ CREATE TABLE IF NOT EXISTS `user` (
   `password` varchar(255) NOT NULL,
   `confirmation_token` varchar(255) NOT NULL,
   `enabled` tinyint(1) NOT NULL DEFAULT '0',
-  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `created_at` timestamp NOT NULL DEFAULT '2014-01-01 00:00:00',
   `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
@@ -39,11 +40,14 @@ CREATE TABLE IF NOT EXISTS `vkontakte_profile` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `user_id` bigint(20) NOT NULL,
   `social_id` bigint(20) NOT NULL,
-  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `created_at` timestamp NOT NULL DEFAULT '2014-01-01 00:00:00',
   `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
-  FOREIGN KEY (`user_id`) ON `user`(`id`)
+  KEY `user_id` (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
+
+ALTER TABLE `vkontakte_profile`
+  ADD CONSTRAINT `vkontakte_profile_user_fk` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`);
 
 CREATE TABLE IF NOT EXISTS `user_profile` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
@@ -56,13 +60,18 @@ CREATE TABLE IF NOT EXISTS `user_profile` (
   `company_id` bigint(20) NOT NULL,
   `job_position` varchar(255) NOT NULL,
   `location_id` bigint(20) NOT NULL,
-  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `created_at` timestamp NOT NULL DEFAULT '2014-01-01 00:00:00',
   `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
-  FOREIGN KEY (`user_id`) ON `user`(`id`),
-  FOREIGN KEY (`company_id`) ON `company`(`id`),
-  FOREIGN KEY (`location_id`) ON `location`(`id`)
+  KEY `user_id` (`user_id`),
+  KEY `company_id` (`company_id`),
+  KEY `location_id` (`location_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
+
+ALTER TABLE `user_profile`
+  ADD CONSTRAINT `user_profile_user_fk` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`),
+  ADD CONSTRAINT `user_profile_company_fk` FOREIGN KEY (`company_id`) REFERENCES `company` (`id`),
+  ADD CONSTRAINT `user_profile_location_fk` FOREIGN KEY (`location_id`) REFERENCES `location` (`id`);
 
 -- Event
 
@@ -72,11 +81,14 @@ CREATE TABLE IF NOT EXISTS `hall` (
   `description` text NOT NULL,
   `location_id` bigint(20) NOT NULL,
   `url` varchar(255) DEFAULT NULL,
-  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `created_at` timestamp NOT NULL DEFAULT '2014-01-01 00:00:00',
   `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
-  FOREIGN KEY (`location_id`) ON `location`(`id`)
+  KEY `location_id` (`location_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
+
+ALTER TABLE `hall`
+  ADD CONSTRAINT `hall_location_fk` FOREIGN KEY (`location_id`) REFERENCES `location` (`id`);
 
 CREATE TABLE IF NOT EXISTS `room` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
@@ -85,11 +97,14 @@ CREATE TABLE IF NOT EXISTS `room` (
   `hall_id` bigint(20) NOT NULL,
   `internal_location` varchar(500) NOT NULL,
   `place_count` bigint(20) NOT NULL,
-  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `created_at` timestamp NOT NULL DEFAULT '2014-01-01 00:00:00',
   `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
-  FOREIGN KEY (`hall_id`) ON `hall`(`id`)
+  KEY `hall_id` (`hall_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
+
+ALTER TABLE `room`
+  ADD CONSTRAINT `room_hall_fk` FOREIGN KEY (`hall_id`) REFERENCES `hall` (`id`);
 
 CREATE TABLE IF NOT EXISTS `hall_event` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
@@ -97,15 +112,18 @@ CREATE TABLE IF NOT EXISTS `hall_event` (
   `description` text NOT NULL,
   `hall_event_type` varchar(255) NOT NULL DEFAULT 'Conference',
   `hall_id` bigint(20) NOT NULL,
-  `start_time` timestamp NOT NULL,
-  `end_time` timestamp NOT NULL,
+  `start_time` timestamp NOT NULL DEFAULT '2014-01-01 00:00:00',
+  `end_time` timestamp NOT NULL DEFAULT '2014-01-01 00:00:00',
   `time_slot_in_minutes` bigint(20) NOT NULL DEFAULT 5,
-  `registration_start_time` timestamp NOT NULL,
-  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `registration_start_time` timestamp NOT NULL DEFAULT '2014-01-01 00:00:00',
+  `created_at` timestamp NOT NULL DEFAULT '2014-01-01 00:00:00',
   `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
-  FOREIGN KEY (`hall_id`) ON `hall`(`id`)
+  KEY `hall_id` (`hall_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
+
+ALTER TABLE `hall_event`
+  ADD CONSTRAINT `hall_event_hall_fk` FOREIGN KEY (`hall_id`) REFERENCES `hall` (`id`);
 
 CREATE TABLE IF NOT EXISTS `participant` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
@@ -113,12 +131,16 @@ CREATE TABLE IF NOT EXISTS `participant` (
   `hall_event_id` bigint(20) NOT NULL,
   `system_photo_filename` varchar(255) NOT NULL,
   `public_photo_filename` varchar(255) NOT NULL,
-  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `created_at` timestamp NOT NULL DEFAULT '2014-01-01 00:00:00',
   `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
-  FOREIGN KEY (`user_id`) ON `user`(`id`),
-  FOREIGN KEY (`hall_event_id`) ON `hall_event`(`id`)
+  KEY `user_id` (`user_id`),
+  KEY `hall_event_id` (`hall_event_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
+
+ALTER TABLE `participant`
+  ADD CONSTRAINT `participant_user_fk` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`),
+  ADD CONSTRAINT `participant_hall_event_fk` FOREIGN KEY (`hall_event_id`) REFERENCES `hall_event` (`id`);
 
 CREATE TABLE IF NOT EXISTS `partner` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
@@ -128,12 +150,16 @@ CREATE TABLE IF NOT EXISTS `partner` (
   `custom_role_name` varchar(255) NOT NULL,
   `system_logo_filename` varchar(255) NOT NULL,
   `public_logo_filename` varchar(255) NOT NULL,
-  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `created_at` timestamp NOT NULL DEFAULT '2014-01-01 00:00:00',
   `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
-  FOREIGN KEY (`hall_event_id`) ON `hall_event`(`id`),
-  FOREIGN KEY (`company_id`) ON `company`(`id`)
+  KEY `hall_event_id` (`hall_event_id`),
+  KEY `company_id` (`company_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
+
+ALTER TABLE `partner`
+  ADD CONSTRAINT `partner_hall_event_fk` FOREIGN KEY (`hall_event_id`) REFERENCES `hall_event` (`id`),
+  ADD CONSTRAINT `partner_company_fk` FOREIGN KEY (`company_id`) REFERENCES `company` (`id`);
 
 CREATE TABLE IF NOT EXISTS `comment_author` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
@@ -141,33 +167,43 @@ CREATE TABLE IF NOT EXISTS `comment_author` (
   `hall_event_id` bigint(20) NOT NULL,
   `system_photo_filename` varchar(255) NOT NULL,
   `public_photo_filename` varchar(255) NOT NULL,
-  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `created_at` timestamp NOT NULL DEFAULT '2014-01-01 00:00:00',
   `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
-  FOREIGN KEY (`user_id`) ON `user`(`id`),
-  FOREIGN KEY (`hall_event_id`) ON `hall_event`(`id`)
+  KEY `user_id` (`user_id`),
+  KEY `hall_event_id` (`hall_event_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
+
+ALTER TABLE `comment_author`
+  ADD CONSTRAINT `comment_author_user_fk` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`),
+  ADD CONSTRAINT `comment_author_hall_event_fk` FOREIGN KEY (`hall_event_id`) REFERENCES `hall_event` (`id`);
 
 CREATE TABLE IF NOT EXISTS `event_comment` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `comment_author_id` bigint(20) NOT NULL,
   `event_comment_type` varchar(255) NOT NULL DEFAULT 'BeforeComment',
   `comment_text` text NOT NULL,
-  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `created_at` timestamp NOT NULL DEFAULT '2014-01-01 00:00:00',
   `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
-  FOREIGN KEY (`comment_author_id`) ON `comment_author`(`id`)
+  KEY `comment_author_id` (`comment_author_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
+
+ALTER TABLE `event_comment`
+  ADD CONSTRAINT `event_comment_comment_author_fk` FOREIGN KEY (`comment_author_id`) REFERENCES `comment_author` (`id`);
 
 CREATE TABLE IF NOT EXISTS `event_subscription` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `hall_event_id` bigint(20) NOT NULL,
   `email` varchar(255) NOT NULL,
-  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `created_at` timestamp NOT NULL DEFAULT '2014-01-01 00:00:00',
   `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
-  FOREIGN KEY (`hall_event_id`) ON `hall_event`(`id`)
+  KEY `hall_event_id` (`hall_event_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
+
+ALTER TABLE `event_subscription`
+  ADD CONSTRAINT `event_subscription_hall_event_fk` FOREIGN KEY (`hall_event_id`) REFERENCES `hall_event` (`id`);
 
 -- Content
 
@@ -187,11 +223,14 @@ CREATE TABLE IF NOT EXISTS `talk_request` (
   `other_conferences` text DEFAULT NULL,
   `key_technologies` text NOT NULL,
   `reporter_wishes` text DEFAULT NULL,
-  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `created_at` timestamp NOT NULL DEFAULT '2014-01-01 00:00:00',
   `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
-  FOREIGN KEY (`user_id`) ON `user`(`id`)
+  KEY `user_id` (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
+
+ALTER TABLE `talk_request`
+  ADD CONSTRAINT `talk_request_user_fk` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`);
 
 CREATE TABLE IF NOT EXISTS `event_branch` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
@@ -199,7 +238,7 @@ CREATE TABLE IF NOT EXISTS `event_branch` (
   `description` text NOT NULL,
   `system_picture_filename` varchar(255) NOT NULL,
   `public_picture_filename` varchar(255) NOT NULL,
-  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `created_at` timestamp NOT NULL DEFAULT '2014-01-01 00:00:00',
   `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
@@ -209,11 +248,14 @@ CREATE TABLE IF NOT EXISTS `branch_leader` (
   `user_id` bigint(20) NOT NULL,
   `system_photo_filename` varchar(255) NOT NULL,
   `public_photo_filename` varchar(255) NOT NULL,
-  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `created_at` timestamp NOT NULL DEFAULT '2014-01-01 00:00:00',
   `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
-  FOREIGN KEY (`user_id`) ON `user`(`id`)
+  KEY `user_id` (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
+
+ALTER TABLE `branch_leader`
+  ADD CONSTRAINT `branch_leader_user_fk` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`);
 
 CREATE TABLE IF NOT EXISTS `speaker` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
@@ -221,12 +263,16 @@ CREATE TABLE IF NOT EXISTS `speaker` (
   `company_id` bigint(20) NOT NULL,
   `system_photo_filename` varchar(255) NOT NULL,
   `public_photo_filename` varchar(255) NOT NULL,
-  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `created_at` timestamp NOT NULL DEFAULT '2014-01-01 00:00:00',
   `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
-  FOREIGN KEY (`user_id`) ON `user`(`id`),
-  FOREIGN KEY (`company_id`) ON `company`(`id`)
+  KEY `user_id` (`user_id`),
+  KEY `company_id` (`company_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
+
+ALTER TABLE `speaker`
+  ADD CONSTRAINT `speaker_user_fk` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`),
+  ADD CONSTRAINT `speaker_company_fk` FOREIGN KEY (`company_id`) REFERENCES `company` (`id`);
 
 CREATE TABLE IF NOT EXISTS `speciality` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
@@ -235,11 +281,14 @@ CREATE TABLE IF NOT EXISTS `speciality` (
   `hall_event_id` bigint(20) NOT NULL,
   `system_picture_filename` varchar(255) NOT NULL,
   `public_picture_filename` varchar(255) NOT NULL,
-  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `created_at` timestamp NOT NULL DEFAULT '2014-01-01 00:00:00',
   `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
-  FOREIGN KEY (`hall_event_id`) ON `hall_event`(`id`)
+  KEY `hall_event_id` (`hall_event_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
+
+ALTER TABLE `speciality`
+  ADD CONSTRAINT `speciality_hall_event_fk` FOREIGN KEY (`hall_event_id`) REFERENCES `hall_event` (`id`);
 
 CREATE TABLE IF NOT EXISTS `room_event` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
@@ -251,13 +300,18 @@ CREATE TABLE IF NOT EXISTS `room_event` (
   `time_slot_quantity` bigint(20) NOT NULL,
   `event_branch_id` bigint(20) NOT NULL,
   `talk_request_id` bigint(20) NOT NULL,
-  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `created_at` timestamp NOT NULL DEFAULT '2014-01-01 00:00:00',
   `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
-  FOREIGN KEY (`room_id`) ON `room`(`id`),
-  FOREIGN KEY (`event_branch_id`) ON `event_branch`(`id`),
-  FOREIGN KEY (`talk_request_id`) ON `talk_request`(`id`)
+  KEY `room_id` (`room_id`),
+  KEY `event_branch_id` (`event_branch_id`),
+  KEY `talk_request_id` (`talk_request_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
+
+ALTER TABLE `room_event`
+  ADD CONSTRAINT `room_event_room_fk` FOREIGN KEY (`room_id`) REFERENCES `room` (`id`),
+  ADD CONSTRAINT `room_event_event_branch_fk` FOREIGN KEY (`event_branch_id`) REFERENCES `event_branch` (`id`),
+  ADD CONSTRAINT `room_event_talk_request_fk` FOREIGN KEY (`talk_request_id`) REFERENCES `talk_request` (`id`);
 
 CREATE TABLE IF NOT EXISTS `creative_material` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
@@ -265,11 +319,14 @@ CREATE TABLE IF NOT EXISTS `creative_material` (
   `room_event_id` bigint(20) NOT NULL,
   `title` varchar(500) NOT NULL,
   `url` varchar(255) NOT NULL,
-  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `created_at` timestamp NOT NULL DEFAULT '2014-01-01 00:00:00',
   `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
-  FOREIGN KEY (`event_branch_id`) ON `event_branch`(`id`)
+  KEY `room_event_id` (`room_event_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
+
+ALTER TABLE `creative_material`
+  ADD CONSTRAINT `creative_material_room_event_fk` FOREIGN KEY (`room_event_id`) REFERENCES `room_event` (`id`);
 
 -- Many to many
 
@@ -277,31 +334,43 @@ CREATE TABLE IF NOT EXISTS `event_branch_leader` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `event_branch_id` bigint(20) NOT NULL,
   `branch_leader_id` bigint(20) NOT NULL,
-  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `created_at` timestamp NOT NULL DEFAULT '2014-01-01 00:00:00',
   `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
-  FOREIGN KEY (`event_branch_id`) ON `event_branch`(`id`),
-  FOREIGN KEY (`branch_leader_id`) ON `branch_leader`(`id`)
+  KEY `event_branch_id` (`event_branch_id`),
+  KEY `branch_leader_id` (`branch_leader_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
+
+ALTER TABLE `event_branch_leader`
+  ADD CONSTRAINT `event_branch_leader_event_branch_fk` FOREIGN KEY (`event_branch_id`) REFERENCES `event_branch` (`id`),
+  ADD CONSTRAINT `event_branch_leader_branch_leader_fk` FOREIGN KEY (`branch_leader_id`) REFERENCES `branch_leader` (`id`);
 
 CREATE TABLE IF NOT EXISTS `room_event_speaker` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `room_event_id` bigint(20) NOT NULL,
   `speaker_id` bigint(20) NOT NULL,
-  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `created_at` timestamp NOT NULL DEFAULT '2014-01-01 00:00:00',
   `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
-  FOREIGN KEY (`room_event_id`) ON `room_event`(`id`),
-  FOREIGN KEY (`speaker_id`) ON `speaker`(`id`)
+  KEY `room_event_id` (`room_event_id`),
+  KEY `speaker_id` (`speaker_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
+
+ALTER TABLE `room_event_speaker`
+  ADD CONSTRAINT `room_event_speaker_room_event_fk` FOREIGN KEY (`room_event_id`) REFERENCES `room_event` (`id`),
+  ADD CONSTRAINT `room_event_speaker_speaker_fk` FOREIGN KEY (`speaker_id`) REFERENCES `speaker` (`id`);
 
 CREATE TABLE IF NOT EXISTS `room_event_speciality` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `room_event_id` bigint(20) NOT NULL,
   `speciality_id` bigint(20) NOT NULL,
-  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `created_at` timestamp NOT NULL DEFAULT '2014-01-01 00:00:00',
   `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
-  FOREIGN KEY (`room_event_id`) ON `room_event`(`id`),
-  FOREIGN KEY (`speciality_id`) ON `speciality`(`id`)
+  KEY `room_event_id` (`room_event_id`),
+  KEY `speciality_id` (`speciality_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
+
+ALTER TABLE `room_event_speciality`
+  ADD CONSTRAINT `room_event_speciality_room_event_fk` FOREIGN KEY (`room_event_id`) REFERENCES `room_event` (`id`),
+  ADD CONSTRAINT `room_event_speciality_speciality_fk` FOREIGN KEY (`speciality_id`) REFERENCES `speciality` (`id`);
