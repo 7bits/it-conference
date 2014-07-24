@@ -8,6 +8,6 @@ import org.happydev.lite.model.AbstractEntity;
 public class Company extends AbstractEntity {
 
     private String name;
-    private String site;
+    private String url;
     private Location location;
 }

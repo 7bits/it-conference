@@ -9,7 +9,7 @@ import org.happydev.lite.model.social.User;
 public class Participant extends AbstractEntity {
 
     private User user;
+    private HallEvent hallEvent;
     private String systemPhotoFileName;
     private String publicPhotoFileName;
-    private HallEvent hallEvent;
 }

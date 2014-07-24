@@ -13,6 +13,8 @@ public class User extends AbstractEntity {
     private String password;
     private String confirmationToken;
     private boolean enabled;
+    /** Reverse link */
     private UserProfile userProfile;
+    /** Reverse link */
     private List<SocialProfile> socialProfiles;
 }

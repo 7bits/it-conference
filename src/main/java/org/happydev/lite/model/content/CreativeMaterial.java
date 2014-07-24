@@ -10,5 +10,5 @@ public class CreativeMaterial extends AbstractEntity {
     private CreativeMaterialType creativeMaterialType;
     private RoomEvent roomEvent;
     private String title;
-    private String source;
+    private String url;
 }

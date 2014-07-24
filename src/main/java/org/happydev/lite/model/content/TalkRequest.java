@@ -17,8 +17,8 @@ public class TalkRequest extends AbstractEntity {
     private RoomEventType roomEventType;
     private Long minimalTimeInMinutes;
     private Long maximalTimeInMinutes;
-    private String presentation;
-    private String video;
+    private String presentationUrl;
+    private String videoUrl;
     private String otherConferences;
     private String keyTechnologies;
     private String reporterWishes;

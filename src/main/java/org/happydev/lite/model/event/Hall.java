@@ -13,5 +13,7 @@ public class Hall extends AbstractEntity {
     private String name;
     private String description;
     private Location location;
+    private String url;
+    /** Reverse link */
     private List<Room> rooms;
 }

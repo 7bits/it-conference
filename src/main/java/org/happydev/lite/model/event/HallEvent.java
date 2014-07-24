@@ -18,5 +18,6 @@ public class HallEvent extends AbstractEntity {
     private Long endTime;
     private Long timeSlotInMinutes;
     private Long registrationStartTime;
+    /** Reverse link */
     private List<Company> partners;
 }

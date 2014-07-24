@@ -11,7 +11,8 @@ public class EventBranch extends AbstractEntity {
 
     private String name;
     private String description;
-    private List<BranchLeader> leaders;
     private String systemPictureFileName;
     private String publicPictureFileName;
+    /** Many to many relationship */
+    private List<BranchLeader> leaders;
 }

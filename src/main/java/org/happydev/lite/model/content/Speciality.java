@@ -14,5 +14,6 @@ public class Speciality extends AbstractEntity {
     private HallEvent hallEvent;
     private String systemPhotoFileName;
     private String publicPhotoFileName;
+    /** Many to many relationship */
     private List<RoomEvent> roomEvents;
 }

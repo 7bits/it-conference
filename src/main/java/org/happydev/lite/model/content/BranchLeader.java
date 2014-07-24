@@ -13,5 +13,6 @@ public class BranchLeader extends AbstractEntity {
     private User user;
     private String systemPhotoFileName;
     private String publicPhotoFileName;
+    /** Many to many relationship */
     private List<EventBranch> eventBranches;
 }

@@ -18,7 +18,10 @@ public class RoomEvent extends AbstractEntity {
     private Long timeSlotQuantity;
     private EventBranch eventBranch;
     private TalkRequest talkRequest;
+    /** Many to many relationship */
     private List<Speaker> speakers;
+    /** Many to many relationship */
     private List<Speciality> specialities;
+    /** Reverse link */
     private List<CreativeMaterial> creativeMaterials;
 }

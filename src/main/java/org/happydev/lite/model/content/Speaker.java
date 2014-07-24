@@ -16,5 +16,6 @@ public class Speaker extends AbstractEntity {
     private Company company;
     private String systemPhotoFileName;
     private String publicPhotoFileName;
+    /** Many to many relationship */
     private List<RoomEvent> roomEvents;
 }
