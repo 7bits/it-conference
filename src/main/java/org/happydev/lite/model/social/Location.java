@@ -1,15 +1,15 @@
 package org.happydev.lite.model.social;
 
 
-import java.util.List;
+import org.happydev.lite.model.AbstractEntity;
 
 /**
  * A place with post address
  */
-public class Location {
+public class Location extends AbstractEntity {
 
-    private Long id;
     private String country;
     private String city;
-    private List<String> address;
+    private String firstAddress;
+    private String secondAddress;
 }

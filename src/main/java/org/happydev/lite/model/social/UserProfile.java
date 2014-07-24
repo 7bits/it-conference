@@ -1,13 +1,12 @@
 package org.happydev.lite.model.social;
 
-import java.util.List;
+import org.happydev.lite.model.AbstractEntity;
 
 /**
  * A user profile
  */
-public class UserProfile {
+public class UserProfile extends AbstractEntity {
 
-    private Long id;
     private User user;
     private String firstName;
     private String middleName;
@@ -17,5 +16,4 @@ public class UserProfile {
     private Company company;
     private String jobPosition;
     private Location location;
-    private List<SocialProfile> socialProfiles;
 }

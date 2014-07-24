@@ -1,4 +1,4 @@
-package org.happydev.lite.model.schedule;
+package org.happydev.lite.model.content;
 
 import org.happydev.lite.model.NamedType;
 import org.happydev.lite.model.WrongTypeNameException;

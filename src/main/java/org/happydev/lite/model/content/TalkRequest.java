@@ -1,14 +1,13 @@
 package org.happydev.lite.model.content;
 
-import org.happydev.lite.model.schedule.RoomEventType;
+import org.happydev.lite.model.AbstractEntity;
 import org.happydev.lite.model.social.User;
 
 /**
  * A talk request
  */
-public class TalkRequest {
+public class TalkRequest extends AbstractEntity {
 
-    private Long id;
     private String event;
     private String branch;
     private User requester;

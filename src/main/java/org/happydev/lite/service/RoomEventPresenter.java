@@ -1,6 +1,6 @@
 package org.happydev.lite.service;
 
-import org.happydev.lite.model.schedule.RoomEvent;
+import org.happydev.lite.model.content.RoomEvent;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,6 +34,15 @@ public class RoomEventPresenter {
      * @return a list of the RoomEvent objects
      */
     public List<RoomEvent> findRoomEventsBySpeakerId(final Long speakerId) {
+        return new ArrayList<RoomEvent>();
+    }
+
+    /**
+     * Finds all Room events for the concrete Speciality at the concrete Hall event
+     * @param specialityId an ID of the Speciality
+     * @return a list of the RoomEvent objects
+     */
+    public List<RoomEvent> findRoomEventsBySpecialityId(final Long specialityId) {
         return new ArrayList<RoomEvent>();
     }
 

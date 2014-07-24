@@ -1,6 +1,6 @@
 package org.happydev.lite.web.response;
 
-import org.happydev.lite.model.schedule.RoomEvent;
+import org.happydev.lite.model.content.RoomEvent;
 
 /**
  * JSON API response for RoomEvent object

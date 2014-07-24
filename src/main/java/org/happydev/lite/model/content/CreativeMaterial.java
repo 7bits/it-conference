@@ -1,13 +1,12 @@
 package org.happydev.lite.model.content;
 
-import org.happydev.lite.model.schedule.RoomEvent;
+import org.happydev.lite.model.AbstractEntity;
 
 /**
  * A creative material of the event
  */
-public class CreativeMaterial {
+public class CreativeMaterial extends AbstractEntity {
 
-    private Long id;
     private CreativeMaterialType creativeMaterialType;
     private RoomEvent roomEvent;
     private String title;

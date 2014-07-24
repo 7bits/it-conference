@@ -1,15 +1,17 @@
 package org.happydev.lite.model.content;
 
+import org.happydev.lite.model.AbstractEntity;
+
 import java.util.List;
 
 /**
- * A thematic branch of the Event
+ * A thematic Branch of the Hall event
  */
-public class EventBranch {
+public class EventBranch extends AbstractEntity {
 
-    private Long id;
-    private Speciality speciality;
-    private List<BranchLeader> leaders;
-    private String pictureFileName;
+    private String name;
     private String description;
+    private List<BranchLeader> leaders;
+    private String systemPictureFileName;
+    private String publicPictureFileName;
 }

@@ -1,11 +1,12 @@
 package org.happydev.lite.model.social;
 
+import org.happydev.lite.model.AbstractEntity;
+
 /**
  * A business company
  */
-public class Company {
+public class Company extends AbstractEntity {
 
-    private Long id;
     private String name;
     private String site;
     private Location location;

@@ -1,19 +1,20 @@
 package org.happydev.lite.model.content;
 
-import org.happydev.lite.model.schedule.RoomEvent;
+import org.happydev.lite.model.AbstractEntity;
+import org.happydev.lite.model.social.Company;
 import org.happydev.lite.model.social.User;
 
 import java.util.List;
 
 /**
- * A Speaker of the concrete Hall event with Talks he does, may correspond to several Event branches.
+ * A Speaker of the concrete Hall event with Room events (talks) he does, may correspond to several Event branches.
  * All Event branches should belong to the same Hall event.
  */
-public class Speaker {
+public class Speaker extends AbstractEntity {
 
-    private Long id;
     private User user;
-    private String photoFileName;
-    private List<EventBranch> eventBranches;
+    private Company company;
+    private String systemPhotoFileName;
+    private String publicPhotoFileName;
     private List<RoomEvent> roomEvents;
 }

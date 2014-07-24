@@ -1,16 +1,17 @@
 package org.happydev.lite.model.content;
 
+import org.happydev.lite.model.AbstractEntity;
 import org.happydev.lite.model.social.User;
 
 import java.util.List;
 
 /**
- * The special entity for Branch Leader as a Participant with Branches he leads
+ * A Branch leader with Branches he leads
  */
-public class BranchLeader {
+public class BranchLeader extends AbstractEntity {
 
-    private Long id;
     private User user;
-    private String photoFileName;
+    private String systemPhotoFileName;
+    private String publicPhotoFileName;
     private List<EventBranch> eventBranches;
 }

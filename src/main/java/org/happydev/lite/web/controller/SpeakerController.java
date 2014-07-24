@@ -1,5 +1,6 @@
 package org.happydev.lite.web.controller;
 
+import org.happydev.lite.model.WrongTypeNameException;
 import org.happydev.lite.model.content.Speaker;
 import org.happydev.lite.service.SpeakerPresenter;
 import org.happydev.lite.web.UrlParameterException;

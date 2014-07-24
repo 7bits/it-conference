@@ -5,15 +5,12 @@ package org.happydev.lite.model.social;
  */
 interface SocialProfile {
 
-    Long getId();
-    void setId(Long id);
+    User getUser();
+    void setUser(final User user);
 
-    SocialProfileType getProfileType();
-    void setProfileType(SocialProfileType profileType);
+    SocialProfileType getSocialProfileType();
+    void setSocialProfileType(final SocialProfileType socialProfileType);
 
     Long getSocialId();
-    void setSocialId(Long socialId);
-
-    User getUser();
-    void setUser(User user);
+    void setSocialId(final Long socialId);
 }

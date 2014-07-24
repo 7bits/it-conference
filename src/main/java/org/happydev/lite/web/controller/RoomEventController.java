@@ -1,6 +1,6 @@
 package org.happydev.lite.web.controller;
 
-import org.happydev.lite.model.schedule.RoomEvent;
+import org.happydev.lite.model.content.RoomEvent;
 import org.happydev.lite.service.RoomEventPresenter;
 import org.happydev.lite.web.UrlParameterException;
 import org.happydev.lite.web.response.RoomEventListResponse;
@@ -191,6 +191,35 @@ public class RoomEventController {
         try {
             speakerId = controllerUtils.convertStringToLong(speakerIdStr, true);
             roomEventList = roomEventPresenter.findRoomEventsBySpeakerId(speakerId);
+        } catch (UrlParameterException e) {
+            success = false;
+            errorMessage = "Speaker ID is wrong or empty";
+        }
+
+        return new RoomEventListResponse(success, errorMessage, roomEventList);
+    }
+
+    /**
+     * Returns a response object with Room event list for a concrete Speciality if possible.
+     * When <code>success == true</code> list is present and error message is null.
+     * When <code>success == false</code> list is null and error message is present; only when Speciality ID
+     * is wrong or empty.
+     * @param specialityIdStr a String value for Speciality ID
+     * @return a RoomEventListResponse object, never null
+     */
+    @RequestMapping(value = "/speciality-room-event-list/{specialityId}", method = RequestMethod.GET)
+    @ResponseBody
+    public RoomEventListResponse specialityRoomEventList(
+            @PathVariable(value = "specialityId") final String specialityIdStr
+    ) {
+        Boolean success = true;
+        String errorMessage = null;
+        List<RoomEvent> roomEventList = null;
+
+        Long specialityId = null;
+        try {
+            specialityId = controllerUtils.convertStringToLong(specialityIdStr, true);
+            roomEventList = roomEventPresenter.findRoomEventsBySpecialityId(specialityId);
         } catch (UrlParameterException e) {
             success = false;
             errorMessage = "Speaker ID is wrong or empty";
