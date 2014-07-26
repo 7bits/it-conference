@@ -1,376 +1,483 @@
+-- Common
+
+insert into `picture` (`system_photo_filename`, `public_photo_filename`, `is_default`)
+values ('default-person-photo-2012.png', 'default-person-photo-2012.png', 1),                     -- 1
+    ('default-person-photo-2013.png', 'default-person-photo-2013.png', 1),
+    ('default-person-photo-2014.png', 'default-person-photo-2014.png', 1),
+    ('default-company-logo-2012.png', 'default-company-logo-2012.png', 1),                        -- 4
+    ('default-company-logo-2013.png', 'default-company-logo-2013.png', 1),
+    ('default-company-logo-2014.png', 'default-company-logo-2014.png', 1),
+    ('default-speciality-picture-2012.png', 'default-speciality-picture-2012.png', 1),            -- 7
+    ('default-speciality-picture-2013.png', 'default-speciality-picture-2013.png', 1),
+    ('default-speciality-picture-2014.png', 'default-speciality-picture-2014.png', 1),
+    ('default-branch-leader-photo-2012.png', 'default-branch-leader-photo-2012.png', 1),          -- 10
+    ('default-branch-leader-photo-2013.png', 'default-branch-leader-photo-2013.png', 1),
+    ('default-branch-leader-photo-2014.png', 'default-branch-leader-photo-2014.png', 1),
+    ('default-speaker-photo-2012.png', 'default-speaker-photo-2012.png', 1),                      -- 13
+    ('default-speaker-photo-2013.png', 'default-speaker-photo-2013.png', 1),
+    ('default-speaker-photo-2014.png', 'default-speaker-photo-2014.png', 1),
+    ('default-event-branch-picture-2012.png', 'default-event-branch-picture-2012.png', 1),        -- 16
+    ('default-event-branch-picture-2013.png', 'default-event-branch-picture-2013.png', 1),
+    ('default-event-branch-picture-2014.png', 'default-event-branch-picture-2014.png', 1),
+    ('dpashkevich-2012.png', 'dpashkevich-2012.png', 0),                                          -- 19
+    ('kchuprick-2012.png', 'kchuprick-2012.png', 0),
+    ('akoltsov-2012.png', 'akoltsov-2012.png', 0),
+    ('akoltsov-2013.png', 'akoltsov-2013.png', 0),
+    ('7bits-logo-2012.png', '7bits-logo-2012.png', 0),                                            -- 23
+    ('thumbtack-logo-2012.png', 'thumbtack-logo-2012.png', 0),
+    ('7bits-logo-2013.png', '7bits-logo-2013.png', 0),
+    ('thumbtack-logo-2013.png', 'thumbtack-logo-2013.png', 0),
+    ('luxoft-logo-2013.png', 'luxoft-logo-2013.png', 0),
+    ('magnetic-pay-logo-2013.png', 'magnetic-pay-logo-2013.png', 0),
+    ('7bits-logo-2014.png', '7bits-logo-2014.png', 0),
+    ('thumbtack-logo-2014.png', 'thumbtack-logo-2014.png', 0),
+    ('sberezhnoy-2012.png', 'sberezhnoy-2012.png', 0),                                            -- 31
+    ('dprovotorov-2012.png', 'dprovotorov-2012.png', 0),
+    ('ntolstov-2013.png', 'ntolstov-2013.png', 0),
+    ('akirillov-2013.png', 'akirillov-2013.png', 0),
+    ('amikhailov-2013.png', 'amikhailov-2013.png', 0),
+    ('dpashkevich-2014.png', 'dpashkevich-2014.png', 0),                                          -- 36
+    ('atarasenko-2014.png', 'atarasenko-2014.png', 0),
+    ('azinoviev-2013.png', 'azinoviev-2013.png', 0),                                              -- 38
+    ('dnelubin-2013.png', 'dnelubin-2013.png', 0),
+    ('inemytchenko-2012.png', 'inemytchenko-2012.png', 0),
+    ('inemytchenko-2013.png', 'inemytchenko-2013.png', 0),
+    ('itaratukhin-2013.png', 'itaratukhin-2013.png', 0),
+    ('arodionov-2013.png', 'arodionov-2013.png', 0),
+    ('pnegoduyko-2013.png', 'pnegoduyko-2013.png', 0),
+    ('eatepalikhina-2013.png', 'eatepalikhina-2013.png', 0),
+    ('fakhmetzyanov-2013.png', 'fakhmetzyanov-2013.png', 0),
+    ('mkyshtymov-2013.png', 'mkyshtymov-2013.png', 0),
+    ('epoley-2013.png', 'epoley-2013.png', 0),
+    ('seliseev-2013.png', 'seliseev-2013.png', 0),
+    ('dsnitko-2013.png', 'dsnitko-2013.png', 0),
+    ('nglukhikh-2013.png', 'nglukhikh-2013.png', 0),
+    ('kmokevnin-2013.png', 'kmokevnin-2013.png', 0),
+    ('atarasenko-2012.png', 'atarasenko-2012.png', 0),
+    ('atarasenko-2013.png', 'atarasenko-2013.png', 0),
+    ('dpashkevich-2013.png', 'dpashkevich-2013.png', 0),
+    ('development-2012.png', 'development-2012.png', 0),                                          -- 56
+    ('management-2012.png', 'management-2012.png', 0),
+    ('design-2012.png', 'design-2012.png', 0);
+
+insert into `product_subscription` (`email`)
+values ('annie.tarasenko@gmail.com'),
+  ('annie_omsk@mail.ru'),
+  ('aloha@7bits.it');
+
 -- Social
 
-CREATE TABLE IF NOT EXISTS `location` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `country` varchar(255) NOT NULL,
-  `city` varchar(255) NOT NULL,
-  `first_address` varchar(500) DEFAULT NULL,
-  `second_address` varchar(500) DEFAULT NULL,
-  `created_at` timestamp NOT NULL DEFAULT '2014-01-01 00:00:00',
-  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
+insert into `location` (`country`, `city`, `first_address`)
+values ('Россия', 'г. Омск', 'ул. Учебная д. 83, каб. 212'),     -- 7bits, IT-loft 1
+    ('Россия', 'г. Омск', 'ул. 70 лет Октября д. 25 к. 6'),      -- Экспоцентр 2
+    ('Россия', 'г. Омск', 'ул. 70 лет Октября д. 25 к. 2'),      -- АРВД 3
+    ('Россия', 'п. Чернолучье (Омская область)', null),          -- База отдыха им. Стрельникова 4
+    ('Россия', 'г. Омск', 'ул. Маршала Жукова д. 21, 5-6 этаж'), -- Тамтэк 5
+    ('Россия', 'г. Омск', null),                                 -- Magnetic pay 6
+    ('Россия', 'г. Москва', null),                               -- Люксофт 7
+    ('Россия', 'г. Омск', 'ул. 7-я Линия, 132, офис 1'),         -- Единая служба 8
+    ('Россия', 'г. Омск', null),                                 -- Анна Тарасенко 9
+    ('Россия', 'г. Омск', null),                                 -- Дмитрий Пашкевич 10
+    ('Россия', 'г. Омск', null),                                 -- Алексей Зиновьев 11
+    ('Россия', 'г. Омск', null),                                 -- Леонид Бабиенко 12
+    ('Россия', 'г. Омск', null),                                 -- Константин Чуприк 13
+    ('Россия', 'г. Омск', null),                                 -- Денис Нелюбин 14
+    ('Россия', 'г. Омск', null),                                 -- Григорий Косьяненко 15
+    ('Россия', 'г. Омск', null),                                 -- Андрей Кольцов 16
+    ('Россия', 'г. Омск', 'пр. Мира д. 55а'),                    -- 1-й корпус ОмГУ 17
+    ('Россия', 'г. Новосибирск', null),                          -- 2ГИС 18
+    ('Таиланд', 'г. Бангкок', null),                             -- Toptal 19
+    ('Россия', 'г. Омск', null),                                 -- Амальгама 20
+    ('Россия', 'г. Омск', null),                                 -- Центр перспективы и развития 21
+    ('Россия', 'г. Ульяновск', null),                            -- Undev 22
+    ('Россия', 'г. Набережные челны', null),                     -- ГАУ "ИТ-парк" 23
+    ('Россия', 'г. Красноярск', null),                           -- Чипса 24
+    ('Россия', 'г. Томск', null),                                -- Userstory 25
+    ('Россия', 'г. Барнаул', null),                              -- Punk You Brand 26
+    ('Россия', 'г. Новосибирск', null),                          -- Wow agency 27
+    ('Россия', 'г. Омск', null);                                 -- Алексей Родионов 28
 
-CREATE TABLE IF NOT EXISTS `company` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) NOT NULL,
-  `url` varchar(255) NOT NULL,
-  `location_id` bigint(20) DEFAULT NULL,
-  `created_at` timestamp NOT NULL DEFAULT '2014-01-01 00:00:00',
-  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id`),
-  KEY `location_id` (`location_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
+insert into `company` (`name`, `url`, `location_id`)
+values ('7bits', 'http://7bits.ru', 1),                                          -- 7bits 1
+    ('Агентство рекламно-выставочной деятельности', 'http://arvd.ru/', 3),       -- АРВД 2
+    ('База отдыха имени Стрельникова', 'http://www.baza-strelnikova.ru/', 4),    -- База отдыха им. Стрельникова 3
+    ('Тамтэк', 'http://thumbtack.ru/', 5),                                       -- Тамтэк 4
+    ('Magnetic pay', 'https://magnetic-pay.com/', 6),                            -- Magnetic pay 5
+    ('Люксофт', 'http://www.luxoft.ru/', 7),                                     -- Люксофт 6
+    ('Единая служба', 'http://www.estaxi.ru/', 8),                               -- Единая служба 7
+    ('2ГИС', 'http://2gis.ru/', 18),                                             -- 2ГИС 8
+    ('Toptal', 'http://www.toptal.com/', 19),                                    -- Toptal 9
+    ('Амальгама', null, 20),                                                     -- Амальгама 10
+    ('Центр перспективы и развития', null, 21),                                  -- Центр перспективы и развития 11
+    ('Undev', null, 22),                                                         -- Undev 12
+    ('ГАУ "ИТ-парк"', null, 23),                                                 -- ГАУ "ИТ-парк" 13
+    ('Чипса', null, 24),                                                         -- Чипса 14
+    ('Userstory', null, 25),                                                     -- Userstory 15
+    ('Punk You Brand', null, 26),                                                -- Punk You Brand 16
+    ('Wow agency', null, 27),                                                    -- Wow agency 17
+    ('Magnetic project', null, 6);                                               -- Magnetic project 18
 
-ALTER TABLE `company`
-  ADD CONSTRAINT `company_location_fk` FOREIGN KEY (`location_id`) REFERENCES `location` (`id`);
+insert into `user` (`email`, `password`, `confirmation_token`, `enabled`)
+values ('at@7bits.it', PASSWORD('123'), null, 1),              -- Анна Тарасенко 1
+    ('dsp@thumbtack.net', PASSWORD('123'), null, 1),           -- Дмитрий Пашкевич 2
+    ('zaleslaw.sin@gmail.com', PASSWORD('123'), null, 1),      -- Алексей Зиновьев 3
+    ('babienko@gmail.com', PASSWORD('123'), null, 1),          -- Леонид Бабиенко 4
+    ('constantinchuprik@gmail.com', PASSWORD('123'), null, 1), -- Константин Чуприк 5
+    ('dnelubin@gmail.com', PASSWORD('123'), null, 1),          -- Денис Нелюбин 6
+    ('g.a.kosyanenko@gmail.com', PASSWORD('123'), null, 1),    -- Григорий Косьяненко 7
+    ('andrewkoltsov@gmail.com', PASSWORD('123'), null, 1),     -- Андрей Кольцов 8
+    ('in@7bits.it', PASSWORD('123'), null, 1),                 -- Иван Немытченко 9
+    ('i.taratuhin@2gis.ru', PASSWORD('123'), null, 1),         -- Илья Таратухин 10
+    ('p0deje@gmail.com', PASSWORD('123'), null, 1),            -- Алексей Родионов 11
+    ('pavel.negoduyko@gmail.com', PASSWORD('123'), null, 1),   -- Павел Негодуйко 12
+    ('atepalihina@inbox.ru', PASSWORD('123'), null, 1),        -- Елена Атепалихина 13
+    ('mokevnin@gmail.com', PASSWORD('123'), null, 1),          -- Кирилл Мокевнин 14
+    ('faemfaridovich@gmail.com', PASSWORD('123'), null, 1),    -- Фаем Ахметзянов 15
+    ('maxkysh@gmail.com', PASSWORD('123'), null, 1),           -- Максим Кыштымов 16
+    ('poley.e@userstory.ru', PASSWORD('123'), null, 1),        -- Евгений Полей 17
+    ('stas@userstory.ru', PASSWORD('123'), null, 1),           -- Станислав Елисеев 18
+    ('snitkodanil@gmail.com', PASSWORD('123'), null, 1),       -- Данил Снитко 19
+    ('nick@wearewowagency.com', PASSWORD('123'), null, 1);     -- Николай Глухих 20
 
-CREATE TABLE IF NOT EXISTS `user` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `email` varchar(255) NOT NULL,
-  `password` varchar(255) NOT NULL,
-  `confirmation_token` varchar(255) NOT NULL,
-  `enabled` tinyint(1) NOT NULL DEFAULT '0',
-  `created_at` timestamp NOT NULL DEFAULT '2014-01-01 00:00:00',
-  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
+insert into `vkontakte_profile` (`user_id`, `social_id`)
+values (1, 3862800);        -- Анна Тарасенко
 
-CREATE TABLE IF NOT EXISTS `vkontakte_profile` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `user_id` bigint(20) NOT NULL,
-  `social_id` bigint(20) NOT NULL,
-  `created_at` timestamp NOT NULL DEFAULT '2014-01-01 00:00:00',
-  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id`),
-  KEY `user_id` (`user_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
-
-ALTER TABLE `vkontakte_profile`
-  ADD CONSTRAINT `vkontakte_profile_user_fk` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`);
-
-CREATE TABLE IF NOT EXISTS `user_profile` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `user_id` bigint(20) NOT NULL,
-  `first_name` varchar(255) NOT NULL,
-  `middle_name` varchar(255) NOT NULL,
-  `last_name` varchar(255) NOT NULL,
-  `phone_number` varchar(255) NOT NULL,
-  `self_description` text NOT NULL,
-  `company_id` bigint(20) NOT NULL,
-  `job_position` varchar(255) NOT NULL,
-  `location_id` bigint(20) NOT NULL,
-  `created_at` timestamp NOT NULL DEFAULT '2014-01-01 00:00:00',
-  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id`),
-  KEY `user_id` (`user_id`),
-  KEY `company_id` (`company_id`),
-  KEY `location_id` (`location_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
-
-ALTER TABLE `user_profile`
-  ADD CONSTRAINT `user_profile_user_fk` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`),
-  ADD CONSTRAINT `user_profile_company_fk` FOREIGN KEY (`company_id`) REFERENCES `company` (`id`),
-  ADD CONSTRAINT `user_profile_location_fk` FOREIGN KEY (`location_id`) REFERENCES `location` (`id`);
+insert into `user_profile` (`user_id`, `first_name`, `last_name`, `phone_number`,
+    `company_id`, `job_position`, `location_id`)
+values (1, 'Анна', 'Тарасенко', '+79095350073', 1, 'Генеральный директор', 9),
+    (2, 'Дмитрий', 'Пашкевич', null, 4, 'Директор', 10),
+    (3, 'Алексей', 'Зиновьев', null, 4, 'Java-разработчик', 11),
+    (4, 'Леонид', 'Бабиенко', null, 18, 'Генеральный директор', 12),
+    (5, 'Константин', 'Чуприк', null, 18, 'PHP-разработчик', 13),
+    (6, 'Денис', 'Нелюбин', null, 7, 'Системный архитектор', 14),
+    (7, 'Григорий', 'Косьяненко', null, 7, 'Разработчик', 15),
+    (8, 'Андрей', 'Кольцов', null, 6, 'Python-разработчик', 16),
+    (9, 'Иван', 'Немытченко', null, 1, 'Технический директор', 1),
+    (10, 'Илья', 'Таратухин', null, 8, 'Веб-разработчик', 18),
+    (11, 'Алексей', 'Родионов', null, 9, 'Paradev', 28),
+    (16, 'Максим', 'Кыштымов', null, 14, 'Руководитель студии', 24),
+    (20, 'Николай', 'Глухих', null, 17, 'Директор', 27);
 
 -- Event
 
-CREATE TABLE IF NOT EXISTS `hall` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) NOT NULL,
-  `description` text NOT NULL,
-  `location_id` bigint(20) NOT NULL,
-  `url` varchar(255) DEFAULT NULL,
-  `created_at` timestamp NOT NULL DEFAULT '2014-01-01 00:00:00',
-  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id`),
-  KEY `location_id` (`location_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
+insert into `hall` (`name`, `description`, `location_id`, `url`)
+values ('IT-loft', 'Прекрасное место для проведения ИТ-мероприятий', 1, 'http://itlft.ru'),
+    ('Конгресс-холл Омского областного Экспоцентра', 'Площадка Областного Экспоцентра уникальна. Она расположена на пересечении оживленных городских магистралей в самом востребованном торговом районе Омска.', 2, 'http://arvd.ru/'),
+    ('База отдыха имени Стрельникова', 'База отдыха им. Стрельникова - это живописное место в реликтовом сосновом бору, простор и воздух которого подарят незабываемые впечатления, отличное настроение и заряд бодрости на долгое время.', 4, 'http://www.baza-strelnikova.ru/'),
+    ('Омский государственный университет, 1-й корпус', '', 17, 'http://omsu.ru');
 
-ALTER TABLE `hall`
-  ADD CONSTRAINT `hall_location_fk` FOREIGN KEY (`location_id`) REFERENCES `location` (`id`);
+insert into `room` (`name`, `description`, `hall_id`, `internal_location`, `place_count`)
+values ('Open space', 'Большое открытое пространство с возможностью проведения хакатонов', 1, null, 100),
+    ('Событийная', 'Отдельная комната для небольших мероприятий', 1, 'Правая часть IT-loft, надпись "событийная" на дверях', 30),
+    ('Главный зал', 'Большой зал для пленарных заседаний', 2, '4-й этаж', 400),
+    ('Синий зал', 'Зал для докладов', 2, '3-й этаж', 250),
+    ('Зеленый зал', 'Зал для докладов и круглых столов', 2, '3-й этаж', 100),
+    ('Малый зал', 'Зал для небольших мероприятий', 2, '3-й этаж', 40),
+    ('Столовая', 'Зона для организации обедов и кофе-брейков', 2, '2-й этаж, холл', 100),
+    ('Главный зал', 'Большой зал для докладов и концертов', 3, 'Ангар, 2-й этаж', 250),
+    ('Малый зал', 'Зал для небольших мероприятий', 3, '5-й корпус, цокольный этаж (бар)', 40),
+    ('Учебный класс', 'Зал для небольших мероприятий', 3, '5-й корпус, цокольный этаж (за гардеробом)', 40),
+    ('Стойка администрации', 'Место для получения ключей от комнат', 3, '1-й корпус, вход с торца', 0),
+    ('Актовый зал', 'Большой зал для докладов и концертов', 4, '1-й корпус, 3-й этаж, ауд. 303', 300),
+    ('Аудитория 301', 'Учебная аудитория с проектором и затемнением', 4, '1-й корпус, 3-й этаж, ауд. 301', 250),
+    ('Аудитория 315', 'Учебная аудитория с проектором', 4, '1-й корпус, 3-й этаж, ауд. 315', 250);
 
-CREATE TABLE IF NOT EXISTS `room` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) NOT NULL,
-  `description` text NOT NULL,
-  `hall_id` bigint(20) NOT NULL,
-  `internal_location` varchar(500) NOT NULL,
-  `place_count` bigint(20) NOT NULL,
-  `created_at` timestamp NOT NULL DEFAULT '2014-01-01 00:00:00',
-  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id`),
-  KEY `hall_id` (`hall_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
+insert into `hall_event` (`name`, `description`, `hall_event_type`, `hall_id`,
+     `start_time`, `end_time`, `time_slot_in_minutes`, `registration_start_time`,
+     `default_person_photo_id`, `default_company_logo_id`, `default_speciality_picture_id`, `default_branch_leader_photo_id`, `default_speaker_photo_id`, `default_event_branch_picture_id`)
+values ('HappyDev 2012', 'Уникальная IT-конференция для разработчиков, дизайнеров и менеджеров', 'Conference', 2,
+        '2012-09-29 10:00:00', '2012-09-30 19:00:00', 5, '2012-08-01 10:00:00',
+        1, 4, 7, 10, 13, 16
+    ),
+    ('HappyDev 2013', 'Действительно полезная конференция', 'Conference', 3,
+         '2013-12-07 10:00:00', '2013-12-08 17:00:00', 5, '2013-11-01 10:00:00',
+        2, 5, 8, 11, 14, 17
+    ),
+    ('HappyDev 2014', 'Действительно полезная конференция', 'Conference', 3,
+         '2014-12-06 10:00:00', '2014-12-07 17:00:00', 5, '2014-11-01 10:00:00',
+        3, 6, 9, 12, 15, 18
+    ),
+    ('HappyDev-lite 2014', 'IT-конференция для студентов и школьников', 'Conference', 4,
+         '2014-09-13 10:00:00', '2014-09-14 19:00:00', 5, '2014-08-01 10:00:00',
+        3, 6, 9, 12, 15, 18
+    ),
+    ('1-й Омский ИТ-субботник', 'Мини-конференция, которая проходит в Омске каждую первую субботу месяца, не взирая на погоду', 'Conference', 1,
+         '2012-12-01 11:00:00', '2012-12-01 14:00:00', 10, '2012-11-20 10:00:00',
+        null, null, null, null, null, null
+    );
 
-ALTER TABLE `room`
-  ADD CONSTRAINT `room_hall_fk` FOREIGN KEY (`hall_id`) REFERENCES `hall` (`id`);
+insert into `participant` (`user_id`, `hall_event_id`, `self_description`, `picture_id`)
+values (2, 1, null, 19),
+    (5, 1, null, 20),
+    (8, 1, null, 21),
+    (8, 2, null, 22),
+    (2, 5, null, 19),
+    (5, 5, null, 20),
+    (8, 5, null, 21);
 
-CREATE TABLE IF NOT EXISTS `hall_event` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) NOT NULL,
-  `description` text NOT NULL,
-  `hall_event_type` varchar(255) NOT NULL DEFAULT 'Conference',
-  `hall_id` bigint(20) NOT NULL,
-  `start_time` timestamp NOT NULL DEFAULT '2014-01-01 00:00:00',
-  `end_time` timestamp NOT NULL DEFAULT '2014-01-01 00:00:00',
-  `time_slot_in_minutes` bigint(20) NOT NULL DEFAULT 5,
-  `registration_start_time` timestamp NOT NULL DEFAULT '2014-01-01 00:00:00',
-  `created_at` timestamp NOT NULL DEFAULT '2014-01-01 00:00:00',
-  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id`),
-  KEY `hall_id` (`hall_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
+insert into `partner` (`hall_event_id`, `company_id`, `partner_role`, `custom_role_name`, `picture_id`)
+values (1, 1, 'Creator', 'Организатор', 23),
+  (1, 4, 'Sponsor', 'Спонсор', 24),
+  (2, 1, 'Creator', 'Организатор', 25),
+  (2, 4, 'Sponsor', 'Серебряный спонсор', 26),
+  (2, 6, 'Sponsor', 'Серебряный спонсор', 27),
+  (2, 5, 'Sponsor', 'Золотой спонсор', 28),
+  (3, 1, 'Creator', 'Организатор', 29),
+  (4, 1, 'Creator', 'Организатор', 30);
 
-ALTER TABLE `hall_event`
-  ADD CONSTRAINT `hall_event_hall_fk` FOREIGN KEY (`hall_id`) REFERENCES `hall` (`id`);
+insert into `comment_author` (`hall_event_id`, `first_name`, `last_name`, `location`, `company`, `job_position`, `picture_id`)
+values (1, 'Сергей', 'Бережной', 'Киев', 'AnotherPM', null, 31),
+    (1, 'Дмитрий', 'Провоторов', 'Воронеж', 'Мануфактура', 'Директор', 32),
+    (2, 'Никита', 'Толстов', 'Омск', 'Толстов груп', 'Директор', 33),
+    (2, 'Антон', 'Кириллов', 'Москва', 'Zeptolab', 'Архитектор ПО', 34),
+    (2, 'Анатолий', 'Михайлов', 'Дублин', 'Sonru', 'Разработчик', 35),
+    (4, 'Дмитрий', 'Пашкевич', 'Омск', 'Тамтэк', 'Директор', 36),
+    (4, 'Анна', 'Тарасенко', 'Омск', '7bits', 'Директор', 37);
 
-CREATE TABLE IF NOT EXISTS `participant` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `user_id` bigint(20) NOT NULL,
-  `hall_event_id` bigint(20) NOT NULL,
-  `system_photo_filename` varchar(255) NOT NULL,
-  `public_photo_filename` varchar(255) NOT NULL,
-  `created_at` timestamp NOT NULL DEFAULT '2014-01-01 00:00:00',
-  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id`),
-  KEY `user_id` (`user_id`),
-  KEY `hall_event_id` (`hall_event_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
+insert into `event_comment` (`comment_author_id`, `event_comment_type`, `comment_text`)
+values (1, 'BeforeComment', 'Да, довольно интересное событие, которое ищет свою нишу в рынке конференций и идей. Приятно удивляет то, что вы хотите сделать конфу практичной, а не «популистской», Это замечательное решение, которого давно ждет рынок:)'),
+    (2, 'BeforeComment', 'У вас очень крутой подход к реализации и ваше письмо с пожеланиями по теме и структуре выступления просто покорило меня. Успеха вам! Уверен, у вас все получится отлично!'),
+    (3, 'BeforeComment', 'В Омске достаточно редко проходят полезные мероприятия по части интернета, тем более такого масштаба. Мне совершенно очевидно, что чтобы быть профессионалом, нужно расти, хорошие конференции — прекрасный инструмент для этого. Поэтому вопрос «идти или нет» для меня не вставал, мы едем с коллегами вшестером.'),
+    (4, 'AfterComment', CONCAT('Ехал я, скажу честно, с определенной долей скепсиса. однако он моментально рассеялся как только мы разговорились с другими докладчиками по пути на мероприятие (я оказался в группе заезжающей накануне, в компании с Кирилл Мокевнин, Максим Семенкин и Антон Корзунов). этим просто фантастическим составом мы сразу устроили дискуссию на профессиональные темы, которая длилась до 3-4 утра по Москве.\n',
+        'Следующий день у меня начался с доклада "Мотивация 3.0", который читал Алексей Пименов . это был просто фантастический доклад, который я рекомендую всем и каждому, от менеджеров до простых программистов, очень хорошо фокусирует и расставляет приоритеты.\n',
+        'На самом деле, это был единственный доклад, который я прослушал от начала до конца, потому что все остальное время у меня прошло в общении в кулуарах. встретил очень много интересных и увлеченных людей, узнал о степени развития ИТ в регионах (чем был немало поражен, скажу честно).\n',
+        'Преодолев технические неполадки все-таки прочитал свой доклад, судя по реакции зала, он был тяжеловат, будем работать дальше. тем не менее, удалось зацепить много народа, хотя я рассчитывал на программерскую, а не на преподавательскую аудиторию.\n',
+        'Дальнейший вечер прошел в очень интересном и классном общении с ребятами из разнообразных российских стартапов, особенно запомнились Magnetic Pay. в воскресенье устроил баркэмп по Scala и отчалил в столицу.\n',
+        'Поразил очень высокий уровень отдельных людей и всеобщая сильная тяга к знаниям и обучению остальных участников конференции. Организаторы большие молодцы! уровень конференции был очень высоким, а подобной атмосферы не встречалось давно на такого рода мероприятиях. Все-таки упор на общение и подобающая обстановка стали решающим фактором.')),
+    (5, 'BeforeComment', CONCAT('Первый хэппидев, прошедший с огромным успехом, сперва вызвал неоднозначную реацию. IT-конференция в Омске, на которую готов приехать ни один десяток столичных спикеров? Вы серьезно?\n',
+        'Но когда конференция началась, мы поняли – это конференция на уровне тех, что проводит Яндекс, DevConf и DevPoint. Огромное количество талантливых разработчиков, инженеров, тестировщиков, маркетологов делятся своим опытом и создают особую атмосферу, которую словами просто не передать! На вторую конференцию HappyDev я еду выпытать тайные знания у А.Чистякова и И.Евтуховича, а также познакомиться с интересными ребятами, которых собирается уже ни одна сотня!')),
+    (6, 'BeforeComment', 'Уважаемые студенты и старшеклассники, интересующиеся программированием и компьютерными технологиями. Я начал программировать в школе, в ВУЗе мое увлечение компьютерами и всем, что с ними связано, только окрепло. В то время, на заре Интернета, было сложно находить ответы на многие вопросы, поэтому хорошая книга и опытный наставник ценились на вес золота. Теперь у нас есть Интернет! Но как узнать, какой из ответов - правильный? Как отделить действительно ценный совет от форумного флуда? Цените возможность вживую пообщаться с ведущими специалистами лучших ИТ-компаний города. Время опытных наставников по-прежнему на вес золота :-)'),
+    (7, 'BeforeComment', 'Мы находимся в уникальном месте и в уникальное время. Я мало знаю мест в России, где есть такие возможности для студентов как можно раньше узнать все об индустрии разработки ПО. Огромное количество бесплатных мероприятий, на которых можно познакомиться с компаниями, научиться писать игры и приложения, набраться опыта у высококлассных специалистов. Погрузитесь в ИТ мирового уровня на 2 дня!');
 
-ALTER TABLE `participant`
-  ADD CONSTRAINT `participant_user_fk` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`),
-  ADD CONSTRAINT `participant_hall_event_fk` FOREIGN KEY (`hall_event_id`) REFERENCES `hall_event` (`id`);
-
-CREATE TABLE IF NOT EXISTS `partner` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `hall_event_id` bigint(20) NOT NULL,
-  `company_id` bigint(20) NOT NULL,
-  `partner_role` varchar(255) NOT NULL,
-  `custom_role_name` varchar(255) NOT NULL,
-  `system_logo_filename` varchar(255) NOT NULL,
-  `public_logo_filename` varchar(255) NOT NULL,
-  `created_at` timestamp NOT NULL DEFAULT '2014-01-01 00:00:00',
-  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id`),
-  KEY `hall_event_id` (`hall_event_id`),
-  KEY `company_id` (`company_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
-
-ALTER TABLE `partner`
-  ADD CONSTRAINT `partner_hall_event_fk` FOREIGN KEY (`hall_event_id`) REFERENCES `hall_event` (`id`),
-  ADD CONSTRAINT `partner_company_fk` FOREIGN KEY (`company_id`) REFERENCES `company` (`id`);
-
-CREATE TABLE IF NOT EXISTS `comment_author` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `user_id` bigint(20) NOT NULL,
-  `hall_event_id` bigint(20) NOT NULL,
-  `system_photo_filename` varchar(255) NOT NULL,
-  `public_photo_filename` varchar(255) NOT NULL,
-  `created_at` timestamp NOT NULL DEFAULT '2014-01-01 00:00:00',
-  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id`),
-  KEY `user_id` (`user_id`),
-  KEY `hall_event_id` (`hall_event_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
-
-ALTER TABLE `comment_author`
-  ADD CONSTRAINT `comment_author_user_fk` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`),
-  ADD CONSTRAINT `comment_author_hall_event_fk` FOREIGN KEY (`hall_event_id`) REFERENCES `hall_event` (`id`);
-
-CREATE TABLE IF NOT EXISTS `event_comment` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `comment_author_id` bigint(20) NOT NULL,
-  `event_comment_type` varchar(255) NOT NULL DEFAULT 'BeforeComment',
-  `comment_text` text NOT NULL,
-  `created_at` timestamp NOT NULL DEFAULT '2014-01-01 00:00:00',
-  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id`),
-  KEY `comment_author_id` (`comment_author_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
-
-ALTER TABLE `event_comment`
-  ADD CONSTRAINT `event_comment_comment_author_fk` FOREIGN KEY (`comment_author_id`) REFERENCES `comment_author` (`id`);
-
-CREATE TABLE IF NOT EXISTS `event_subscription` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `hall_event_id` bigint(20) NOT NULL,
-  `email` varchar(255) NOT NULL,
-  `created_at` timestamp NOT NULL DEFAULT '2014-01-01 00:00:00',
-  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id`),
-  KEY `hall_event_id` (`hall_event_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
-
-ALTER TABLE `event_subscription`
-  ADD CONSTRAINT `event_subscription_hall_event_fk` FOREIGN KEY (`hall_event_id`) REFERENCES `hall_event` (`id`);
+insert into `event_subscription` (`hall_event_id`, `email`)
+values (4, 'at@7bits.it'),
+    (4, 'ak@7bits.it'),
+    (4, 'kk@7bits.it');
 
 -- Content
 
-CREATE TABLE IF NOT EXISTS `talk_request` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `event` varchar(500) NOT NULL,
-  `branch` varchar(500) DEFAULT NULL,
-  `user_id` bigint(20) NOT NULL,
-  `title` text NOT NULL,
-  `description` text NOT NULL,
-  `speakers` text NOT NULL,
-  `room_event_type` varchar(255) NOT NULL DEFAULT 'Report',
-  `minimal_time_in_minutes` bigint(20) NOT NULL,
-  `maximal_time_in_minutes` bigint(20) NOT NULL,
-  `presentation_url` varchar(255) DEFAULT NULL,
-  `video_url` varchar(255) DEFAULT NULL,
-  `other_conferences` text DEFAULT NULL,
-  `key_technologies` text NOT NULL,
-  `reporter_wishes` text DEFAULT NULL,
-  `created_at` timestamp NOT NULL DEFAULT '2014-01-01 00:00:00',
-  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id`),
-  KEY `user_id` (`user_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
+insert into `talk_request` (`event`, `branch`, `email`, `title`,
+    `description`, `speakers`, `room_event_type`, `minimal_time_in_minutes`, `maximal_time_in_minutes`, `presentation_url`, `video_url`,
+    `other_conferences`, `key_technologies`, `reporter_wishes`)
+values ('HappyDev-lite 2014', 'Разработка корпоративных информационных систем', 'gubsky.dmitry@gmail.com', 'Разработка корпоративных информационных систем: мифы и реальность',
+        'Разработка корпоративных информационных систем предприятия на примере НПО "Мир"', 'Дмитрий Губский', 'Report', 20, 40, null, null,
+        null, 'Java?', null),
+    ('HappyDev-lite 2014', 'Web', 'annie.tarasenko@gmail.com', 'Современная web-разработка',
+        'Современное состояние web-разработки и тенденции развития', 'Анна Тарасенко', 'Report', 20, 40, null, null,
+        null, 'Java, Ruby, Rython, PHP etc', null);
 
-ALTER TABLE `talk_request`
-  ADD CONSTRAINT `talk_request_user_fk` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`);
+insert into `event_branch` (`hall_event_id`, `name`, `description`, `picture_id`)
+values (1, 'Стартапы', 'Здесь мы хотим обсудить то, как работа в стартапе отражается на принятии решений в разработке, управлении и дизайне. Дать слово представителям успешных проектов и людям, которые помогают стартапам превращаться в продукты.', null),
+    (1, 'Продуктовая разработка', 'На этой секции мы рассмотрим вопросы зрелых продуктов с клиентской базой. Например, работу под нагрузками, развитие продукта, эволюцию технологий и архитектуры за несколько лет.', null),
+    (1, 'Фабрика проектов', 'Эта секция посвящена опыту веб-студий и аутсорс-компаний, у кого работа с проектами поставлена на поток.', null),
+    (2, 'Жизнь после релиза', 'Ни для кого не секрет, что жизнь проекта после выхода в продакшн только начинается. Это всегда ассоциируется с ростом числа пользователей и денег, но далеко не все думают о специфических особенностях сопровождения проекта.', null),
+    (2, 'Тестирование', 'Вы по-прежнему боитесь рефакторить чужой код, а мелкие правки верстки способны уронить все приемочные тесты? Как получить реальную пользу от автоматизации, расскажут QA-гуру из российских и мировых ИТ-компаний.', null),
+    (2, 'Архитектура', 'Строили, строили и наконец построили. Но, как всегда, не совсем то и совсем не так, как поняли, что надо было бы. Запутались? Мы так и знали! Будем распутываться вместе со спикерами.', null),
+    (2, 'Базы данных', 'Еще недавно для распределенных приложений принято было выбирать NoSQL-решения. Однако, все чаще можно услышать, что старый добрый SQL нас всех переживет. Попробуем разобраться в БД и способах описания моделей данных вместе.', null),
+    (2, 'Работа с требованиями', 'Кто кого заборет? Классический выделенный аналитик или команда разработки, которая сама работает с требованиями по заветам Agile?', null),
+    (2, 'Frontend', 'Если вы думаете, что Frontend - это всего лишь верстка и "немного JavaScript", вы узнаете, что это далеко не так. Если вы интересуетесь современными подходами к созданию клиентской части приложения - от API до UI, вы получите глубокое представление о современных подходах к разработке, плюсах и минусах разных фреймворков а также познакомитесь с уникальным опытом трех известнейших российских компаний.', null),
+    (2, 'Процессы', 'Бюджеты и планирование. Клиенты и продажи. Об этих вещах нет смысла рассуждать абстрактно. Только живой опыт и практические примеры от наших докладчиков!', null),
+    (2, 'Люди', 'Технологии технологиями, но ведь мы-то с вами знаем, что главное в любом деле — люди. Человек может разрушить любую стройную систему и спасти любой безнадежный проект.', null),
+    (2, 'Тренинг для руководителей', 'Кто такой сотрудник в IT компании? И как управление персоналом отличается от управления в других компаниях? Мой 10-летний опыт работы в разных компаниях позволяет мне сделать небезосновательные выводы. Данный сотрудник всегда держит руководителя в тонусе :-) Одно ясно, что привычные манипуляции и опора на должностные обязательства могут не обеспечить уверенности, что задачи будут выполнены в срок и в нужном качестве. И удержание власти никто не отменял…', null),
+    (2, 'Стартапы', 'Для многих "Стартап" - это один из баззвордов. Есть мнение, что стартапами занимаются те, кто просто не хочет работать. Однако, если посмотреть, какими проектами занимаются в ИТ-парке, то понимаешь, что все это далеко не так. Там пашут так, как не снилось большинству офисных программистов. И проекты, которыми занимаются в инкубаторе, интересны и полезны. Представители Челнинской площадки ИТ-парка а также омские стартаперы, - как там побывавшие, так и нет - расскажут о том, как выбрать идею для своего стартапа, где и как лучше всего развивать свои проект и как пережить "долину смерти".', null),
+    (2, 'Start in garage', 'Start in Garage — интенсивная образовательная программа для предпринимателей, занимающихся бизнесом в сфере интернета, облачных сервисов и разработки программных продуктов. Программа поможет выбрать направление на старте и сделать правильные шаги в развитии компании.', null),
+    (2, 'Образование и развитие', 'Все профессиональные разговоры рано или поздно приходят к качеству образования и способам обучения. Как профессионально расти инженеру? Что предлагают вузы и дистанционные курсы? Есть, что обсудить!', null),
+    (2, 'Важные темы', 'На тему написания чистого кода и создания хорошей архитектуры сломано немало копий. Я занимаюсь инженерной культурой в своей компании не один год и накопил немалый опыт в ее создании и поддержании. Готов поделиться и с вами!', null),
+    (2, 'Креативные методики', 'Есть мнение, что придумать интересную идею — это сложная и трудоёмкая задача, которая отнимает кучу времени... Многие спорит с этим мнением. Кто-то соглашается. Мы же пошли таким путём — постарались максимально сократить временные затраты на генерацию идей. Мы ввели в студии использование трёх методик для решения этой задачи. Собственно, этими методиками и приёмами мы и поделимся с вами. Вы сможете использовать их для генерации идей по своим проектам, какими бы они ни были.', null),
+    (2, 'User eXperience (UX)', 'User eXperience — термин, который вошел в обиход разработчиков интерактивных систем совсем недавно и имеет достаточно широкую трактовку в сил того, что бОльшая часть употребляющих его специалистов не имеет практики работы с UX. Между тем, UX-ориентированные методологии в корне переворачивают представление о создании продукта. Знание основных принципов этих подходов позволит сфокусировать всю свою команду в правильном направлении, посмотреть на продукт новым взглядом, «залезть в головы» к вашим пользователям и встать на путь непрерывного улучшения.', null),
+    (2, 'Проектирование интерфейсов', 'Разработка пользовательского интерфейса с предсказуемым результатом является одной из главных задач проектировщика. Знание того, как планировать, выстраивать и контроллировать данный процесс поможет спроектировать продукт, решающий поставленные задачи.', null),
+    (2, 'Арт-дирекшн', 'Это будет не просто лекция, это лекция-дискуссия. Вместе с аудиторией мы поищем ответ на вопрос, что же за зверь такой — арт-директор, найдем понимание этой редкой и сложной профессии.', null),
+    (2, 'Как презентоваться', 'Рассказ об искусстве презентации и практические советы', null),
+    (4, 'Web', 'Все о современной web-разработке', null),
+    (4, 'Mobile', 'Все о современной мобильной разработке', null);
 
-CREATE TABLE IF NOT EXISTS `event_branch` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) NOT NULL,
-  `description` text NOT NULL,
-  `system_picture_filename` varchar(255) NOT NULL,
-  `public_picture_filename` varchar(255) NOT NULL,
-  `created_at` timestamp NOT NULL DEFAULT '2014-01-01 00:00:00',
-  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
+insert into `branch_leader` (`user_id`, `self_description`, `picture_id`)
+values (1, 'Сделала из своего хобби бизнес. Люблю приносить пользу своей работой.', 53),
+    (1, 'Сделала из своего хобби бизнес. Люблю приносить пользу своей работой.', 54),
+    (2, 'Программировал с детства, на разных языках и технологиях (начиная с черепашки Лого). Начал свое дело, когда своей пары рук стало не хватать.', 55),
+    (6, 'Больше десяти лет в ИТ. Сисадмин: делал первые "выделенки" в Омске. Разработчик: писал биллинг на Perl, Forex на Java, веб на PHP, пишу скрипты на Python, мобильные приложения для Android.', 39),
+    (9, null, 40),
+    (9, null, 41),
+    (10, CONCAT('Занимаюсь продуктом 2ГИС Онлайн, это как http://2gis.ru/, так и http://beta.2gis.ru/.\n',
+               'Спикер CodeFest, UWDC, DevConf, DUMP. Уверен, что за Single Page Application будущее веба.\n',
+               'Люблю путешествовать, горные лыжи и MTB. В свободное время пишу в блог.'), 42),
+    (11, 'Последние два года занимаюсь созданием QA и paradevelopment в Toptal. До этого отвечал за автоматизацию тестирования в стартапе Museeka, а также был ведущим тестировщиком в компании Development Mill. Какое-то время был независимым контрибутором команды автоматизации тестирования веб приложений Mozilla. Разработчик Watir.', 43),
+    (12, null, 44),
+    (13, null, 45),
+    (15, null, 46),
+    (16, CONCAT('Работать в области дизайна и компьютерной графики начал в 21 год. Начинал видео-дизайнером в региональной телекомпании. После успел поработать дизайнером-верстальщиком, дизайнером в издательской группе, веб-дизайнером. Какое-то время работал в сфере 3D — риггинг и анимация 3D-персонажей. Достаточно долго работал фрилансером — создание фирменных стилей, логотипов.\n',
+               'В 2008 году образовал студию дизайна Caustica в Красноярске. Студия начала работать с местными заказчиками. В 2012 студия поменяла название на «Чипсу». В настоящее время студия работает как с местными заказчиками, так и с заказчиками из других городов, включая Москву, Нижний Новгород,  Зеленоград, Абакан.\n',
+               'Студия специализируется на дизайне сайтов и приложений, разработке логотипов и фирменных стилей. В основу каждого проекта мы вкладываем интересную визуальную или функциональную идею. Последние пол года стали много внимания уделять маркетинговой составляющей дизайна, помогать заказчикам выделять и доносить клиентские выгоды, УТП посредством дизайна.'), 47),
+    (17, null, 48),
+    (18, null, 49),
+    (19, null, 50),
+    (20, CONCAT('Учредитель и директор одного из ведущих digital-агентств в Сибири WOW.\n'
+               'В портфолио компании множество работ для крупных российских и международных брендов, в том числе, промо-сайтов, сложных технологических и flash-решений.\n',
+               'Одна из основных особенностей компании — работа напрямую с сетевыми рекламными агентствами и иногородними заказчиками, что диктует свои требования к качеству работ, срокам реагирования и стандартизированности процессов.\n',
+               'Помимо веб-дизайна, Николай является специалистом в области управления интернет-бизнесом и клиентского сервиса.\n',
+               'На рынке веб-дизайна с 1998 года. Выпускник НГУ.'), 51);
 
-CREATE TABLE IF NOT EXISTS `branch_leader` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `user_id` bigint(20) NOT NULL,
-  `system_photo_filename` varchar(255) NOT NULL,
-  `public_photo_filename` varchar(255) NOT NULL,
-  `created_at` timestamp NOT NULL DEFAULT '2014-01-01 00:00:00',
-  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id`),
-  KEY `user_id` (`user_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
+insert into `speciality` (`name`, `description`, `hall_event_id`, `picture_id`)
+values ('Разработка', null, 1, 56),
+    ('Управление', null, 1, 57),
+    ('Дизайн', null, 1, 58),
+    ('Разработка', null, 2, null),
+    ('Управление', null, 2, null),
+    ('Дизайн', null, 2, null),
+    ('Стартапы', null, 2, null),
+    ('Важные темы', null, 2, null);
 
-ALTER TABLE `branch_leader`
-  ADD CONSTRAINT `branch_leader_user_fk` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`);
+insert into `speaker` (`user_id`, `company_id`, `self_description`, `picture_id`)
+values (1, 1, 'Сделала из своего хобби бизнес. Люблю приносить пользу своей работой.', 53),
+    (1, 1, 'Сделала из своего хобби бизнес. Люблю приносить пользу своей работой.', 54),
+    (2, 4, 'Программировал с детства, на разных языках и технологиях (начиная с черепашки Лого). Начал свое дело, когда своей пары рук стало не хватать.', 55),
+    (3, 4, 'Один из организаторов Google Developer Group Omsk, аспирант ОмГУ, специализирующийся в исследовании транспортных сетей, дорожных графов, хранении и обработке больших данных.', 38),
+    (4, 18, 'Интернет-маркетолог, предприниматель с 10 класса. Предпочитаю вкладывать деньги в финансы, игры, нишевые сервисы.', null),
+    (5, 18, 'Увлекаюсь программированием со школы. Когда-то любил создавать под десктоп, используя специфичные технологии, затем ушел с головой в Web.', 20),
+    (6, 7, 'Больше десяти лет в ИТ. Сисадмин: делал первые "выделенки" в Омске. Разработчик: писал биллинг на Perl, Forex на Java, веб на PHP, пишу скрипты на Python, мобильные приложения для Android.', 39),
+    (7, 7, CONCAT('Апологет SQL DB. Ищу любимую СУБД, приметы: согласованная на всё, постоянно доступная, морально устойчива к разделению.\n',
+          'В процессе перепробовал многие - Oracle, Teradata, Postgres, - но все не то.\n',
+          'Расскажу почему каждая конкретная "не то", как выбрать посимпатичнее и как жить с тем, что получилось.'), null),
+    (9, 1, null, null),
+    (10, 8, CONCAT('Занимаюсь продуктом 2ГИС Онлайн, это как http://2gis.ru/, так и http://beta.2gis.ru/.\n',
+                  'Спикер CodeFest, UWDC, DevConf, DUMP. Уверен, что за Single Page Application будущее веба.\n',
+                  'Люблю путешествовать, горные лыжи и MTB. В свободное время пишу в блог.'), 42),
+    (11, 9, 'Последние два года занимаюсь созданием QA и paradevelopment в Toptal. До этого отвечал за автоматизацию тестирования в стартапе Museeka, а также был ведущим тестировщиком в компании Development Mill. Какое-то время был независимым контрибутором команды автоматизации тестирования веб приложений Mozilla. Разработчик Watir.', 43),
+    (12, 10, null, 44),
+    (13, 11, null, 45),
+    (14, 12, null, 52),
+    (15, 13, null, 46),
+    (16, 14, CONCAT('Работать в области дизайна и компьютерной графики начал в 21 год. Начинал видео-дизайнером в региональной телекомпании. После успел поработать дизайнером-верстальщиком, дизайнером в издательской группе, веб-дизайнером. Какое-то время работал в сфере 3D — риггинг и анимация 3D-персонажей. Достаточно долго работал фрилансером — создание фирменных стилей, логотипов.\n',
+                   'В 2008 году образовал студию дизайна Caustica в Красноярске. Студия начала работать с местными заказчиками. В 2012 студия поменяла название на «Чипсу». В настоящее время студия работает как с местными заказчиками, так и с заказчиками из других городов, включая Москву, Нижний Новгород,  Зеленоград, Абакан.\n',
+                   'Студия специализируется на дизайне сайтов и приложений, разработке логотипов и фирменных стилей. В основу каждого проекта мы вкладываем интересную визуальную или функциональную идею. Последние пол года стали много внимания уделять маркетинговой составляющей дизайна, помогать заказчикам выделять и доносить клиентские выгоды, УТП посредством дизайна.'), 47),
+    (17, 15, null, 48),
+    (18, 15, null, 49),
+    (19, 16, null, 50),
+    (20, 17, CONCAT('Учредитель и директор одного из ведущих digital-агентств в Сибири WOW.\n'
+                   'В портфолио компании множество работ для крупных российских и международных брендов, в том числе, промо-сайтов, сложных технологических и flash-решений.\n',
+                   'Одна из основных особенностей компании — работа напрямую с сетевыми рекламными агентствами и иногородними заказчиками, что диктует свои требования к качеству работ, срокам реагирования и стандартизированности процессов.\n',
+                   'Помимо веб-дизайна, Николай является специалистом в области управления интернет-бизнесом и клиентского сервиса.\n',
+                   'На рынке веб-дизайна с 1998 года. Выпускник НГУ.'), 51),
+    (12, 5, null, 51);
 
-CREATE TABLE IF NOT EXISTS `speaker` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `user_id` bigint(20) NOT NULL,
-  `company_id` bigint(20) NOT NULL,
-  `system_photo_filename` varchar(255) NOT NULL,
-  `public_photo_filename` varchar(255) NOT NULL,
-  `created_at` timestamp NOT NULL DEFAULT '2014-01-01 00:00:00',
-  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id`),
-  KEY `user_id` (`user_id`),
-  KEY `company_id` (`company_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
+insert into `room_event` (`title`, `description`, `room_event_type`, `room_id`, `start_time_slot`, `time_slot_quantity`,
+     `event_branch_id`, `talk_request_id`)
+values ('Заселение на базу, кофе-брейк', null, 'Registration', 11, 0, 12, null, null),
+    ('Открытие конференции', null, 'Open', 8, 12, 4, null, null),
+    ('Вводный доклад: жизнь после релиза', 'Ни для кого не секрет, что жизнь проекта после выхода в продакшн только начинается. Это всегда ассоциируется с ростом числа пользователей и денег, но далеко не все думают о специфических особенностях сопровождения проекта.', 'Report', 8, 17, 4, 4, null),
+    ('Почему мы кодим с удовольствием: stressless разработка', 'Доклад о том как мы формализовали и автоматизировали полный цикл разработки. Автоматическое развертывание окружения разработчика, управление всеми серверами и непрерывный деплой. И все это кодом и только кодом.', 'Report', 8, 21, 8, 4, null),
+    ('Соль как средство от боли: SaltStack и его отличия от Chef', 'В нашем многополярном мире существует более одного средства управления конфигурацией, и бывает полезно освоить несколько - они все разные. В какой-то момент докладчик заметил за собой стойкое нежелание пользоваться Chef в окружениях, состоящих из менее чем десяти машин. О причинах этого нежелания, а также о средстве управления конфигурацией SaltStack и его преимуществах и недостатках мы и поговорим.', 'Report', 8, 30, 6, 4, null),
+    ('Дискуссия с экспертами и залом', null, 'Discussion', 8, 36, 4, 4, null),
+    ('Открытие секции', null, 'Report', 9, 17, 4, 10, null),
+    ('ИТ-проекты в положенный срок и в рамках бюджета без каких-либо "но"', CONCAT('1. От 80 до 90% любых проектов во всем мире вылетают за сроки и за рамки бюджета. В том числе и не из ИТ отраслей.\n',
+         '2. Причины вылетов, которые рассматривают методолгии управления - верхушка айсберга, настоящие причины глубже.\n',
+         '3. Agile-like методологии и подходы дают технологию, но не дают решения.\n',
+         '4. Критический путь проекта. Максимально длинная цепочка связанных между собой, зависимых задач.\n',
+         '5. Фокус проекта - одна решаемая проблема в один момент времени.\n',
+         '6. Замена позадачного буфера, на проектный буфер. Контроль расхода.\n',
+         '7. Проектное управление резервными сроками и бюджетом.\n',
+         '8. Мотивация команды в рамках бюджета.\n',
+         '9. Удивляем клиента - сдаем раньше, делаем больше.'), 'Report', 9, 21, 8, 10, null),
+    ('Как построить эффективные клиентские сервисы B2C', 'В рамках регламента, но в интересах клиента. 7 ключевых решений, позволяющих сделать из любой посредственности одного из лидеров рынка.', 'Report', 9, 30, 6, null, null),
+    ('Дискуссия с экспертами и залом', null, 'Discussion', 9, 36, 4, 10, null),
+    ('Брифинг на проект', CONCAT('Продуктом является грибной кетчуп. Продукт реальный, а не мультяшный, но редкостная гадость, поди, которая в России не продается.\n',
+        'Я бы хотел, чтобы люди думали в самых разных направлениях – мобильное приложение для готовящих на основе этой жижи, сайт с социальной сетью любителей грибного кетчупа, приложение для соцсетей, где пользователи могут собрать друзей на ужин с этой штукой. Все что угодно, лишь бы решить задачи, перечисленные в конце документа, который мы вам покажем на месте.'), 'Report', 10, 17, 4, 17, null),
+    ('XYZ — три оси поиска идей', CONCAT('• Ось x — корпорация добра нам в помощь\n',
+        '• Ось y — быть как Нео в матрице возможностей\n',
+        '• Ось z — 4D может быть не только кино, но и стимул\n',
+        '• BONUS — ещё пара способов генерации идей (в том числе от Red Keds)'), 'Report', 10, 22, 12, 17, null),
+    ('Работа участников: генерация и оценка идей', CONCAT('1. Вы выберете интересную и актуальную для вас тему, например:\n',
+        '• дизайн/разработка сайта\n',
+        '• разработка логотипа/фирменного стиля\n',
+        '• разработка коммерческого предложения и т.д.\n',
+        '2. Используя приёмы, которые мы вам дадим, придумаете множество первичных идей. Цель данного этапа — генерация как можно большего количества идей. Мы поможем вам в этом, на первый взгляд сложном деле. Советами, подсказами, и т.д.\n',
+        '3. Выберите, либо доработаете 3 лучшие идеи. Из всего множества сгенерированных идей вы самостоятельно выберите 3 самые-самые.\n',
+        '4. Мы обсудим лучшие из ваших идей. Если будет позволять время — выслушаем и прокомментируем все идеи )\n',
+        '5. Финальным результатом станут наброски вашего проекта — стартовой страницы сайта, логотипа, фирменных носителей, оформления коммерческого предложения и т.д.\n',
+        'В качестве эксперимента мы постараемся параллельно с ответами на ваши вопросы сделать свой мини-проект.'), 'Report', 10, 34, 12, 17, null),
+    ('Обед (1-я смена)', null, 'Lunch', 8, 40, 6, 4, null),
+    ('Обед (1-я смена)', null, 'Lunch', 9, 40, 6, 10, null),
+    ('Обед (2-я смена)', null, 'Lunch', 8, 46, 6, 4, null),
+    ('Обед (2-я смена)', null, 'Lunch', 9, 46, 6, 10, null),
+    ('Обед (2-я смена)', null, 'Lunch', 10, 46, 6, 17, null);
 
-ALTER TABLE `speaker`
-  ADD CONSTRAINT `speaker_user_fk` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`),
-  ADD CONSTRAINT `speaker_company_fk` FOREIGN KEY (`company_id`) REFERENCES `company` (`id`);
-
-CREATE TABLE IF NOT EXISTS `speciality` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) NOT NULL,
-  `description` text NOT NULL,
-  `hall_event_id` bigint(20) NOT NULL,
-  `system_picture_filename` varchar(255) NOT NULL,
-  `public_picture_filename` varchar(255) NOT NULL,
-  `created_at` timestamp NOT NULL DEFAULT '2014-01-01 00:00:00',
-  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id`),
-  KEY `hall_event_id` (`hall_event_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
-
-ALTER TABLE `speciality`
-  ADD CONSTRAINT `speciality_hall_event_fk` FOREIGN KEY (`hall_event_id`) REFERENCES `hall_event` (`id`);
-
-CREATE TABLE IF NOT EXISTS `room_event` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `title` varchar(500) NOT NULL,
-  `description` text DEFAULT NULL,
-  `room_event_type` varchar(255) NOT NULL DEFAULT 'Report',
-  `room_id` bigint(20) NOT NULL,
-  `start_time_slot` bigint(20) NOT NULL,
-  `time_slot_quantity` bigint(20) NOT NULL,
-  `event_branch_id` bigint(20) NOT NULL,
-  `talk_request_id` bigint(20) NOT NULL,
-  `created_at` timestamp NOT NULL DEFAULT '2014-01-01 00:00:00',
-  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id`),
-  KEY `room_id` (`room_id`),
-  KEY `event_branch_id` (`event_branch_id`),
-  KEY `talk_request_id` (`talk_request_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
-
-ALTER TABLE `room_event`
-  ADD CONSTRAINT `room_event_room_fk` FOREIGN KEY (`room_id`) REFERENCES `room` (`id`),
-  ADD CONSTRAINT `room_event_event_branch_fk` FOREIGN KEY (`event_branch_id`) REFERENCES `event_branch` (`id`),
-  ADD CONSTRAINT `room_event_talk_request_fk` FOREIGN KEY (`talk_request_id`) REFERENCES `talk_request` (`id`);
-
-CREATE TABLE IF NOT EXISTS `creative_material` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `creative_material_type` varchar(255) NOT NULL DEFAULT 'Slides',
-  `room_event_id` bigint(20) NOT NULL,
-  `title` varchar(500) NOT NULL,
-  `url` varchar(255) NOT NULL,
-  `created_at` timestamp NOT NULL DEFAULT '2014-01-01 00:00:00',
-  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id`),
-  KEY `room_event_id` (`room_event_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
-
-ALTER TABLE `creative_material`
-  ADD CONSTRAINT `creative_material_room_event_fk` FOREIGN KEY (`room_event_id`) REFERENCES `room_event` (`id`);
+insert into `creative_material` (`creative_material_type`, `room_event_id`, `title`, `url`)
+values ('Slides', 3, null, 'https://speakerdeck.com/happydev/zhizn-poslie-rieliza-vviedieniie'),
+    ('Slides', 4, null, 'https://speakerdeck.com/happydev/pochiemu-my-kodim-s-udovol-stviiem-stressless-razrabotka'),
+    ('Slides', 5, null, 'https://speakerdeck.com/happydev/sol-kak-sriedstvo-ot-boli-saltstack-i-iegho-otlichiia-ot-chef'),
+    ('Slides', 8, null, 'https://speakerdeck.com/happydev/zafigha-kozie-baian-ili-it-proiekty-v-polozhiennyi-srok-i-v-ramkakh-biudzhieta-biez-kakikh-libo-no'),
+    ('Slides', 9, null, 'https://speakerdeck.com/happydev/kak-postroit-effiektivnyie-kliientskiie-siervisy-b2c'),
+    ('Slides', 12, null, 'https://speakerdeck.com/happydev/xyz-tri-osi-poiska-idiei'),
+    ('Video', 3, null, 'http://www.youtube.com/watch?v=hofK6qv4jc0'),
+    ('Video', 4, null, 'http://www.youtube.com/watch?v=26M5GHUGVpk'),
+    ('Video', 5, null, 'http://www.youtube.com/watch?v=QcYMhYd7zD8'),
+    ('Video', 7, null, 'http://www.youtube.com/watch?v=bAfzWqPoQbc'),
+    ('Video', 8, null, 'http://www.youtube.com/watch?v=uTVIjZxtYaw'),
+    ('Video', 9, null, 'http://www.youtube.com/watch?v=m3t23q7q_Ug');
 
 -- Many to many
 
-CREATE TABLE IF NOT EXISTS `event_branch_leader` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `event_branch_id` bigint(20) NOT NULL,
-  `branch_leader_id` bigint(20) NOT NULL,
-  `created_at` timestamp NOT NULL DEFAULT '2014-01-01 00:00:00',
-  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id`),
-  KEY `event_branch_id` (`event_branch_id`),
-  KEY `branch_leader_id` (`branch_leader_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
+insert into `event_branch_leader` (`event_branch_id`, `branch_leader_id`)
+values (1, 9),
+    (3, 1),
+    (4, 5),
+    (5, 10),
+    (6, 2),
+    (7, 5),
+    (8, 11),
+    (9, 9),
+    (10, 3),
+    (11, 3),
+    (12, 12),
+    (13, 13),
+    (14, 13),
+    (15, 2),
+    (17, 14),
+    (18, 15),
+    (19, 16),
+    (20, 17),
+    (21, 17);
 
-ALTER TABLE `event_branch_leader`
-  ADD CONSTRAINT `event_branch_leader_event_branch_fk` FOREIGN KEY (`event_branch_id`) REFERENCES `event_branch` (`id`),
-  ADD CONSTRAINT `event_branch_leader_branch_leader_fk` FOREIGN KEY (`branch_leader_id`) REFERENCES `branch_leader` (`id`);
+insert into `event_branch_speciality` (`event_branch_id`, `speciality_id`)
+values (4, 4),
+    (5, 4),
+    (6, 4),
+    (7, 4),
+    (8, 4),
+    (8, 5),
+    (9, 4),
+    (10, 5),
+    (11, 5),
+    (12, 5),
+    (13, 7),
+    (14, 7),
+    (15, 8),
+    (16, 8),
+    (17, 6),
+    (18, 6),
+    (19, 6),
+    (20, 6),
+    (21, 6);
 
-CREATE TABLE IF NOT EXISTS `room_event_speaker` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `room_event_id` bigint(20) NOT NULL,
-  `speaker_id` bigint(20) NOT NULL,
-  `created_at` timestamp NOT NULL DEFAULT '2014-01-01 00:00:00',
-  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id`),
-  KEY `room_event_id` (`room_event_id`),
-  KEY `speaker_id` (`speaker_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
+insert into `room_event_speciality` (`room_event_id`, `speciality_id`)
+values (3, 4),
+    (4, 4),
+    (5, 4),
+    (6, 4),
+    (7, 5),
+    (8, 5),
+    (9, 5),
+    (10, 5),
+    (11, 7),
+    (12, 7),
+    (13, 7);
 
-ALTER TABLE `room_event_speaker`
-  ADD CONSTRAINT `room_event_speaker_room_event_fk` FOREIGN KEY (`room_event_id`) REFERENCES `room_event` (`id`),
-  ADD CONSTRAINT `room_event_speaker_speaker_fk` FOREIGN KEY (`speaker_id`) REFERENCES `speaker` (`id`);
-
-CREATE TABLE IF NOT EXISTS `room_event_speciality` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `room_event_id` bigint(20) NOT NULL,
-  `speciality_id` bigint(20) NOT NULL,
-  `created_at` timestamp NOT NULL DEFAULT '2014-01-01 00:00:00',
-  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id`),
-  KEY `room_event_id` (`room_event_id`),
-  KEY `speciality_id` (`speciality_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
-
-ALTER TABLE `room_event_speciality`
-  ADD CONSTRAINT `room_event_speciality_room_event_fk` FOREIGN KEY (`room_event_id`) REFERENCES `room_event` (`id`),
-  ADD CONSTRAINT `room_event_speciality_speciality_fk` FOREIGN KEY (`speciality_id`) REFERENCES `speciality` (`id`);
+insert into `room_event_speaker` (`room_event_id`, `speaker_id`)
+values(3, 5),
+    (6, 5),
+    (7, 3),
+    (9, 17),
+    (10, 3),
+    (11, 16),
+    (12, 12),
+    (13, 12);
